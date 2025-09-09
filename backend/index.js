@@ -1,8 +1,18 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+require("dotenv").config();
 const PORT = process.env.PORT || 5000;
+const pool = require("./config/db");
+const authRouter = require("./auth/router/auth.router");
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use("/api/auth", authRouter);
+
 
 
 app.listen(PORT, () => {
-    console.log(`Server is running on : http://localhost:${PORT}`);
+  console.log(`Server is running on: http://localhost:${PORT}`);
 });
