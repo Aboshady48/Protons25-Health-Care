@@ -4,12 +4,14 @@ require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 const pool = require("./config/db");
 const authRouter = require("./auth/router/auth.router");
+const taskRouter = require("./dailyPlanner/router/tasks.router");
 
 // Middleware
 app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRouter);
+app.use("/api/tasks", taskRouter);
 
 
 

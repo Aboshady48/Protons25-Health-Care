@@ -27,7 +27,7 @@ const registerController = async (req, res) => {
         const user = result.rows[0];
 
         // generate token
-        const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, { expiresIn: '1y' });
 
         return res.status(201).json({
             message: 'User registered successfully',
