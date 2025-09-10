@@ -28,7 +28,9 @@ const loginController = async (req, res) => {
         const token = jwt.sign(
             { id: user.id, username: user.username },
             SECRET_KEY,
-            { expiresIn: '1h' }
+
+            //1year
+            { expiresIn: '1y' }
         );
 
         // return user data
