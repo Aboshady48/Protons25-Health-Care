@@ -27,24 +27,43 @@
   display: flex;
   gap: 2rem;
 }
-.nav-links li a {
-  text-decoration: none;
-  font-weight: 500;
-  color: white;
-  font-size: 1rem;
-  transition: color 0.3s ease, border-bottom 0.3s ease;
-}
-.nav-links li a:hover {
-  color: #1d3322;
-  border-bottom: 2px solid #1d3322;
+.nav-links li {
+  display: flex;
+  align-items: center;
 }
 
-/* Mobile Menu Toggle */
-.menu-toggle {
-  display: none;
-  font-size: 1.8rem;
+/* Shared Button Style for Nav Links + Logout */
+.nav-btn {
+  background: none;
+  border: 2px solid transparent; /* consistent border */
+  border-radius: 6px;
+  padding: 6px 12px;
   cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
   color: white;
+  text-decoration: none;  /* remove underline for <Link> */
+  display: inline-flex;   /* for icon + text */
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+/* Remove browser default button styles */
+button.nav-btn {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 2px solid transparent;
+  padding: 6px 12px;
+  outline: none;
+}
+
+/* Hover effect */
+.nav-btn:hover {
+  background: #93DA97;
+  color: #1d3322;
+  border-color: #93DA97;
 }
 
 /* Sidebar for Mobile */
@@ -52,7 +71,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 220px;
+  width: 240px;
   height: 100%;
   background: #3E5F44;
   padding-top: 4rem;
@@ -64,13 +83,44 @@
   box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
   animation: slideIn 0.3s ease forwards;
 }
-.sidebar li a {
-  color: white;
-  text-decoration: none;
+
+.sidebar li {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .nav-btn {
   font-size: 1.1rem;
+  border: 2px solid #93DA97;
+}
+
+.sidebar .nav-btn:hover {
+  background: #93DA97;
+  color: #1d3322;
+  border-color: #93DA97;
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
   transition: color 0.3s ease;
 }
-.sidebar li a:hover {
+.close-btn:hover {
   color: #93DA97;
 }
 
