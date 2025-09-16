@@ -1,32 +1,20 @@
 import React from "react";
-import {  BrowserRouter, Routes, Route, Link, Router  } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./componets/register.jsx";
 import Login from "./componets/login.jsx";
+import Navbar from "./component/navbar/Navbar";
 import "./style/index.css";
 
-
-function App() {
+const App = () => {
   return (
-  <div>
-     <BrowserRouter>
-    
+    <BrowserRouter>
+      <Navbar />
       <Routes>
-      
         <Route path="/Register" element={<Register />} />
-        <Route path="/Login" element={<Login/>} />
+        <Route path="/Login" element={<Login />} />
       </Routes>
     </BrowserRouter>
-  </div>
   );
-}
+};
 
 export default App;
-  <BrowserRouter>
-    
-      <Routes>
-      
-        <Route path="/Register" element={<Register />} />
-        <Route path="/Login" element={<Login/>} />
-      </Routes>
-    </BrowserRouter>
- 
