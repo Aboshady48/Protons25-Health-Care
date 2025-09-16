@@ -3,6 +3,7 @@ import axios from "axios";
 import user_icon from "../assets/person.png";
 import password_icon from "../assets/password.png";
 import "./Login.css"
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const userRef = useRef();
@@ -74,6 +75,11 @@ const Login = () => {
           Login
         </button>
       </form>
+
+      <p className="signup-text">
+        Do not have an account?{" "}
+        <Link to="/Register">Click here to sign up</Link>
+      </p>
     </div>
   );
 };
