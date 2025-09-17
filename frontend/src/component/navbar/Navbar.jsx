@@ -1,30 +1,26 @@
-import React from 'react'
-import './Navbar.css'
-import eira_logo from '../../../assets/eira_logo.jpeg'
+import eira from "../../../assets/eira_logo.jpeg"
 
-const Navbar = () => {
-  return (
-    <div className='navbar'>
-
-        <img src={eira_logo} alt="" className='logo' style={{width:"180px", height:"90px" , display:"block",objectFit:"contain"}}/>
-
-         <ul className="sidebar">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Community</a></li>
-            <li><a href="#">Streak</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Ask</a></li>
-        </ul>
+export default function Navbar(){
+    return (
+    <nav className="nav">
+        <img src={eira} alt="Eira Logo" style={{width:"120px",height:"170",objectFit:"contain",display:"block"}}/>
         <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Community</a></li>
-            <li><a href="#">Streak</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Ask</a></li>
+            <li>
+                <a href="/About">About</a> 
+            </li> 
+            <li>    
+                <a href="/Community">Community</a>
+            </li> 
+            <li>   
+                <a href="/Streak">Streak</a>
+            </li>
+            <li>    
+                <a href="/Blog">Blog</a>
+            </li>
+            <li>
+                <a href="/Bot">Bot</a>             
+            </li>  
         </ul>
-    
-    </div>
-  ) 
+    </nav>
+    )
 }
-
-export default Navbar
