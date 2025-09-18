@@ -5,6 +5,17 @@ const PORT = process.env.PORT || 5000;
 const pool = require("./config/db");
 const authRouter = require("./auth/router/auth.router");
 const taskRouter = require("./dailyPlanner/router/tasks.router");
+const MoodRouter = require("./moodAndEnergy/router/moodAndEnergy.router");
+const cors = require("cors");
+
+
+//cors
+app.use(cors(
+  {
+    origin: "http://localhost:5173",
+    credentials: true
+  }
+));
 
 // Middleware
 app.use(express.json());
@@ -12,6 +23,7 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRouter);
 app.use("/api/tasks", taskRouter);
+app.use("/api/mood", MoodRouter);
 
 
 
