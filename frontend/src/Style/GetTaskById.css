@@ -1,0 +1,493 @@
+/* Your existing styles - keeping everything you had */
+.GetTaskById-container {
+    max-width: 1000px; /* Increased from 800px */
+    margin: 60px auto; /* Increased from 40px */
+    padding: 40px; /* Increased from 30px */
+    background: #f9f9f9;
+    border-radius: 16px; /* Increased from 12px */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Enhanced shadow */
+}
+
+.task-header {
+    margin-bottom: 30px; /* Increased from 20px */
+    padding-bottom: 20px; /* Increased from 15px */
+    border-bottom: 3px solid #e8e8e8; /* Thicker border */
+}
+
+.task-header h1 {
+    color: #3e5f44;
+    margin: 0 0 12px 0; /* Increased from 8px */
+    font-size: 2.8rem; /* Increased from 2.2rem */
+    line-height: 1.2;
+}
+
+.task-id {
+    background: #e8f5e8;
+    color: #3e5f44;
+    padding: 6px 12px; /* Increased from 4px 8px */
+    border-radius: 6px; /* Increased from 4px */
+    font-size: 1rem; /* Increased from 0.9rem */
+    font-weight: 500;
+}
+
+.task-content {
+    background: white;
+    padding: 30px; /* Increased from 20px */
+    border-radius: 12px; /* Increased from 8px */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+}
+
+.task-content h3 {
+    color: #2c3e50;
+    margin-bottom: 15px; /* Increased from 10px */
+    font-size: 1.5rem; /* Increased from 1.3rem */
+}
+
+.task-content p {
+    color: #555;
+    line-height: 1.7; /* Increased from 1.6 */
+    font-size: 1.15rem; /* Increased from 1.1rem */
+    white-space: pre-wrap; /* Preserves line breaks */
+}
+
+/* Loading state */
+.task-loading {
+    text-align: center;
+    padding: 80px 30px; /* Increased from 60px 20px */
+    max-width: 1000px; /* Increased from 800px */
+    margin: 60px auto; /* Increased from 40px */
+    background: white;
+    border-radius: 12px; /* Increased from 8px */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+}
+
+.task-loading h2 {
+    color: #3e5f44;
+    margin-bottom: 15px; /* Increased from 10px */
+    font-size: 1.8rem; /* Added */
+}
+
+.loading-container {
+    max-width: 500px; /* Increased from 400px */
+    margin: 0 auto;
+}
+
+.spinner {
+    border: 5px solid #e8f5e8; /* Increased from 4px */
+    border-top: 5px solid #3e5f44; /* Increased from 4px */
+    border-radius: 50%;
+    width: 50px; /* Increased from 40px */
+    height: 50px; /* Increased from 40px */
+    animation: spin 1s linear infinite;
+    margin: 25px auto; /* Increased from 20px */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error state */
+.task-error {
+    text-align: center;
+    padding: 80px 30px; /* Increased from 60px 20px */
+    max-width: 1000px; /* Increased from 800px */
+    margin: 60px auto; /* Increased from 40px */
+    background: #fff5f5;
+    border: 2px solid #ffcccc; /* Thicker border */
+    border-radius: 12px; /* Increased from 8px */
+}
+
+.task-error h2 {
+    color: #d32f2f;
+    margin-bottom: 15px; /* Increased from 10px */
+    font-size: 1.8rem; /* Added */
+}
+
+.error-container {
+    max-width: 600px; /* Increased from 500px */
+    margin: 0 auto;
+}
+
+.error-actions {
+    margin-top: 25px; /* Increased from 20px */
+    display: flex;
+    gap: 15px; /* Increased from 10px */
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.retry-btn {
+    background: #3e5f44;
+    color: white;
+    border: none;
+    padding: 14px 24px; /* Increased from 10px 20px */
+    border-radius: 8px; /* Increased from 6px */
+    cursor: pointer;
+    font-size: 1.1rem; /* Increased from 1rem */
+    margin-top: 15px;
+    transition: background 0.2s ease;
+    min-width: 140px; /* Added for consistent sizing */
+}
+
+.retry-btn:hover {
+    background: #2c4733;
+}
+
+/* Not found state */
+.task-not-found {
+    text-align: center;
+    padding: 80px 30px; /* Increased from 60px 20px */
+    max-width: 1000px; /* Increased from 800px */
+    margin: 60px auto; /* Increased from 40px */
+    background: #fff8e1;
+    border: 2px solid #ffe082; /* Thicker border */
+    border-radius: 12px; /* Increased from 8px */
+}
+
+.not-found-container {
+    max-width: 600px; /* Increased from 500px */
+    margin: 0 auto;
+}
+
+.task-not-found h2 {
+    color: #f57c00;
+    margin-bottom: 15px; /* Increased from 10px */
+    font-size: 1.8rem; /* Added */
+}
+
+/* Back button styles */
+.back-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 20px; /* Increased from 10px 16px */
+    border-radius: 8px; /* Increased from 6px */
+    cursor: pointer;
+    margin-bottom: 25px; /* Increased from 20px */
+    font-size: 1rem; /* Increased from 14px */
+    transition: background 0.2s ease;
+    min-width: 160px; /* Added for consistent sizing */
+}
+
+.back-btn:hover {
+    background: #5a6268;
+}
+
+.back-btn.secondary {
+    background: #3e5f44;
+}
+
+.back-btn.secondary:hover {
+    background: #2c4733;
+}
+
+/* Additional task details styles */
+.task-date {
+    color: #6c757d;
+    font-size: 1rem; /* Increased from 0.9rem */
+    display: block;
+    margin-top: 8px; /* Increased from 5px */
+}
+
+.task-description {
+    background: #f8f9fa;
+    padding: 20px; /* Increased from 15px */
+    border-radius: 8px; /* Increased from 6px */
+    border-left: 5px solid #3e5f44; /* Thicker left border */
+    margin-bottom: 25px; /* Increased from 20px */
+    font-size: 1.1rem; /* Added */
+}
+
+.task-status, .task-priority, .task-due-date {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Increased from 10px */
+    margin: 20px 0; /* Increased from 15px */
+    padding: 16px 20px; /* Increased from 12px 16px */
+    background: #f8f9fa;
+    border-radius: 8px; /* Increased from 6px */
+    border-left: 5px solid #3e5f44; /* Thicker left border */
+}
+
+.task-status strong, .task-priority strong, .task-due-date strong {
+    color: #2c3e50;
+    font-size: 1.1rem; /* Increased from 0.95rem */
+    min-width: 100px; /* Increased from 80px */
+    font-weight: 600;
+}
+
+.status-completed {
+    color: #28a745;
+    background: #d4edda;
+    padding: 6px 12px; /* Increased from 4px 8px */
+    border-radius: 6px; /* Increased from 4px */
+    font-weight: 500;
+    font-size: 1rem; /* Added */
+}
+
+.status-pending {
+    color: #ffc107;
+    background: #fff3cd;
+    padding: 6px 12px; /* Increased from 4px 8px */
+    border-radius: 6px; /* Increased from 4px */
+    font-weight: 500;
+    font-size: 1rem; /* Added */
+}
+
+.status-in-progress {
+    color: #007bff;
+    background: #cce7ff;
+    padding: 6px 12px; /* Increased from 4px 8px */
+    border-radius: 6px; /* Increased from 4px */
+    font-weight: 500;
+    font-size: 1rem; /* Added */
+}
+
+.priority-high {
+    color: #dc3545;
+    background: #f8d7da;
+    padding: 6px 12px; /* Increased from 4px 8px */
+    border-radius: 6px; /* Increased from 4px */
+    font-weight: 500;
+    font-size: 1rem; /* Added */
+}
+
+.priority-medium {
+    color: #fd7e14;
+    background: #fff3cd;
+    padding: 6px 12px; /* Increased from 4px 8px */
+    border-radius: 6px; /* Increased from 4px */
+    font-weight: 500;
+    font-size: 1rem; /* Added */
+}
+
+.priority-low {
+    color: #17a2b8;
+    background: #d1ecf1;
+    padding: 6px 12px; /* Increased from 4px 8px */
+    border-radius: 6px; /* Increased from 4px */
+    font-weight: 500;
+    font-size: 1rem; /* Added */
+}
+
+.due-date {
+    color: #3e5f44;
+    font-weight: 500;
+    font-size: 1.1rem; /* Increased from 0.95rem */
+}
+
+/* Footer styles - Added missing styles */
+.task-footer {
+    text-align: center;
+    margin-top: 40px; /* Increased from 30px */
+    padding-top: 25px; /* Increased from 20px */
+    border-top: 2px solid #e8e8e8; /* Thicker border */
+}
+
+.footer-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.edit-btn, .delete-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s ease;
+    min-width: 140px;
+}
+
+.edit-btn {
+    background: #2a9e45a6;
+}
+
+.edit-btn:hover {
+    background: #5b916a;
+}
+
+.delete-btn {
+    background: #dc3545;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+.edit-btn.secondary, .delete-btn.secondary {
+    background: #3e5f44;
+}
+
+.edit-btn.secondary:hover, .delete-btn.secondary:hover {
+    background: #2c4733;
+}
+
+/* Delete Modal Styles - Added missing styles */
+.delete-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.delete-modal {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.delete-modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #e8e8e8;
+    background: #f8f9fa;
+    border-radius: 12px 12px 0 0;
+}
+
+.delete-modal-header h3 {
+    margin: 0;
+    color: #d32f2f;
+    font-size: 1.3rem;
+}
+
+.delete-modal-body {
+    padding: 24px;
+}
+
+.task-title-preview {
+    font-weight: 600;
+    color: #2c3e50;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 12px 0;
+    font-style: italic;
+}
+
+.delete-warning {
+    color: #d32f2f;
+    font-weight: 500;
+    background: #fff5f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border-left: 4px solid #d32f2f;
+    margin-top: 12px;
+}
+
+.delete-modal-actions {
+    padding: 20px 24px;
+    border-top: 1px solid #e8e8e8;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.cancel-delete-btn, .confirm-delete-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.cancel-delete-btn {
+    background: #6c757d;
+    color: white;
+}
+
+.cancel-delete-btn:hover:not(:disabled) {
+    background: #5a6268;
+}
+
+.confirm-delete-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.confirm-delete-btn:hover:not(:disabled) {
+    background: #c82333;
+}
+
+.cancel-delete-btn:disabled, .confirm-delete-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .GetTaskById-container {
+        margin: 30px 20px; /* Adjusted for mobile */
+        padding: 30px 20px;
+    }
+    
+    .task-header h1 {
+        font-size: 2.2rem; /* Slightly smaller on mobile */
+    }
+    
+    .task-content {
+        padding: 25px 20px;
+    }
+    
+    .error-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .back-btn, .retry-btn, .edit-btn, .delete-btn {
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .task-status, .task-priority, .task-due-date {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 15px;
+    }
+    
+    .footer-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .delete-modal {
+        margin: 20px;
+        width: calc(100% - 40px);
+    }
+    
+    .delete-modal-actions {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .task-header h1 {
+        font-size: 1.9rem;
+    }
+    
+    .GetTaskById-container {
+        padding: 20px 15px;
+    }
+    
+    .task-content {
+        padding: 20px 15px;
+    }
+}

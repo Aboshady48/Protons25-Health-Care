@@ -1,17 +1,12 @@
-import {useState} from 'react'
+import AddTask from "../components/dailyPlanner/AddTask"
+import GetAllTasks from "../components/dailyPlanner/GetAllTasks"
+
 
 export const Home = () => {
-  const [count,setCount] = useState(0)
-
-
   return (
     <div>
-        <h1>Home</h1>
-        <p>This is the home page</p>
-        <button onClick={()=>setCount(count+1)}>count +</button>
-        
-        but
-        <h1>{count}</h1>
+        <AddTask/>
+        <GetAllTasks/>
     </div>
   )
 }

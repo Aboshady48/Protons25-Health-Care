@@ -1,0 +1,340 @@
+/* EditTask.css - Consistent with your existing design system */
+
+.EditTask-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit-task-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e8e8e8;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.edit-task-header h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.edit-task-header .back-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.edit-task-header .back-btn:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+.EditTask-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.todo-input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.todo-input:focus {
+  border-color: #3e5f44;
+  box-shadow: 0 0 8px rgba(62, 95, 68, 0.3);
+  transform: translateY(-1px);
+}
+
+.todo-title-input {
+  font-weight: 500;
+}
+
+.todo-description-input {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.todo-description-input:focus {
+  min-height: 140px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.cancel-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+.update-btn {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #3e5f44;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 120px;
+}
+
+.update-btn:hover:not(:disabled) {
+  background: #2c4733;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(62, 95, 68, 0.3);
+}
+
+.update-btn:disabled,
+.cancel-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.update-btn:disabled:hover,
+.cancel-btn:disabled:hover {
+  transform: none;
+}
+
+/* Loading State */
+.edit-task-loading {
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 700px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit-task-loading h2 {
+  color: #3e5f44;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.loading-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.spinner {
+  border: 4px solid #e8f5e8;
+  border-top: 4px solid #3e5f44;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.edit-task-error {
+  text-align: center;
+  padding: 60px 20px;
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff5f5;
+  border: 2px solid #ffcccc;
+  border-radius: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit-task-error h2 {
+  color: #d32f2f;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.error-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.error-container p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.error-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .EditTask-container {
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  .edit-task-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+  
+  .edit-task-header h2 {
+    font-size: 1.6rem;
+    order: 1;
+  }
+  
+  .edit-task-header .back-btn {
+    order: 2;
+    align-self: center;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cancel-btn,
+  .update-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .EditTask-container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .edit-task-header h2 {
+    font-size: 1.4rem;
+  }
+  
+  .todo-input {
+    padding: 10px 12px;
+  }
+  
+  .form-actions {
+    gap: 10px;
+  }
+}
+
+/* Focus styles for accessibility */
+.back-btn:focus,
+.cancel-btn:focus,
+.update-btn:focus {
+  outline: 3px solid rgba(62, 95, 68, 0.3);
+  outline-offset: 2px;
+}
+
+.todo-input:focus {
+  outline: 3px solid rgba(62, 95, 68, 0.2);
+  outline-offset: 1px;
+}
+
+/* Animation for form appearance */
+.EditTask-form {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects for better UX */
+.form-group:hover .todo-input {
+  border-color: #bbb;
+}
+
+.form-group:hover .todo-input:focus {
+  border-color: #3e5f44;
+}
+
+/* Success state for update button */
+.update-btn.success {
+  background: #28a745;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
