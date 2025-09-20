@@ -3,13 +3,14 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Register from "./components/auth/register.jsx";
 import Login from "./components/auth/login.jsx";
-import Navbar from "./components/navbar/Navbar.jsx";
+import Navbar from "./components/Navbar.jsx";
 import "./Style/index.css";
 import { Home } from "./components/Home.jsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
 import GetAllTasks from "./components/dailyPlanner/GetAllTasks.jsx";
 import { GetTaskById } from "./components/dailyPlanner/GetTaskById.jsx";
 import EditTask from "./components/dailyPlanner/EditTask.jsx"; // Add this import
+import { AboutUs } from "./components/AboutUs.jsx";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -24,7 +25,7 @@ const App = () => {
 
         {/* Protected routes */}
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/about" element={<ProtectedRoute><div>About Page</div></ProtectedRoute>} />
+        <Route path="/about" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
         <Route path="/community" element={<ProtectedRoute><div>Community Page</div></ProtectedRoute>} />
         <Route path="/streak" element={<ProtectedRoute><div>Streak Page</div></ProtectedRoute>} />
         <Route path="/blog" element={<ProtectedRoute><div>Blog Page</div></ProtectedRoute>} />
