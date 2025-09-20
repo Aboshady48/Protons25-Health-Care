@@ -32,8 +32,8 @@
 
 .AddText-input {
   width: 100%;
-  max-width: 400px; 
-  padding: 10px 12px;
+  max-width: 600px; 
+  padding: 30px 35px;
   font-size: 1rem;
   border: 2px solid #ddd;
   border-radius: 4px;
@@ -48,12 +48,12 @@
 
 .AddTask-button {
   padding: 8px 20px; 
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   font-weight: bold;
   background: #3e5f44;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 30px;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.1s ease;
   margin-top: 10px;

@@ -21,12 +21,12 @@ const Login = () => {
 
       console.log("Login success:", response.data);
 
-      // Save token in localStorage
+
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
       }
 
-      //redirect to home page
+      
       navigate("/");
     } catch (err) {
       console.error("Login failed:", err.response?.data || err.message);

@@ -9,14 +9,14 @@ const AddTask = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      // ✅ Get token from localStorage
+      
       const token = localStorage.getItem("token");
       if (!token) {
         alert("You must log in first!");
         return;
       }
 
-      //  Wrap single task in an array (backend expects array)
+      
       const body = [
         {
           title,
@@ -29,7 +29,7 @@ const AddTask = () => {
         body,
         {
           headers: {
-            Authorization: `Bearer ${token}`, //  send token
+            Authorization: `Bearer ${token}`, 
           },
           withCredentials: true,
         }

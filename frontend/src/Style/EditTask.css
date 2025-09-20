@@ -1,0 +1,60 @@
+.EditTask-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.EditTask-container h2 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.EditTask-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.EditTask-input,
+.EditTask-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+  resize: none;
+}
+
+.EditTask-input:focus,
+.EditTask-textarea:focus {
+  outline: none;
+  border-color: #27ae60;
+  box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
+}
+
+.EditTask-button {
+  background: #27ae60;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.EditTask-button:hover {
+  background: #219150;
+  transform: translateY(-2px);
+}
+
+.EditTask-button:active {
+  transform: scale(0.98);
+}

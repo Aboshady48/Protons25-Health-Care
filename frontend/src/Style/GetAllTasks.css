@@ -1,7 +1,7 @@
 .GetAllTasks-container {
-  max-width: 800px;
+  max-width: 710px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 40px;
   background: #f9f9f9;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -19,17 +19,17 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  gap: 15px;
 }
 
 .GetAllTasks-container li {
   background: white;
-  padding: 16px;
-  border-radius: 10px;
+  padding: 20px;
+  border-radius: 100px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: #333;
 }
@@ -41,5 +41,5 @@
 
 .GetAllTasks-container li strong {
   color: #3e5f44;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }

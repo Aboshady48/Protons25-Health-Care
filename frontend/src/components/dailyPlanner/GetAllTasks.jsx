@@ -5,7 +5,7 @@ import "../../Style/GetAllTasks.css";
 const GetAllTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const tasksPerPage = 2; // ✅ Show only 2 tasks per page
+  const tasksPerPage = 2; 
 
   useEffect(() => {
     const getAllData = async () => {
@@ -35,7 +35,6 @@ const GetAllTasks = () => {
     getAllData();
   }, []);
 
-  // ✅ Pagination logic
   const indexOfLastTask = currentPage * tasksPerPage;
   const indexOfFirstTask = indexOfLastTask - tasksPerPage;
   const currentTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
@@ -56,7 +55,7 @@ const GetAllTasks = () => {
         )}
       </ul>
 
-      {/* ✅ Pagination Controls */}
+      {/* Pagination Controls */}
       <div className="pagination">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
