@@ -1,44 +1,81 @@
+/* frontend/src/Style/StreaksPage.css */
+
 .streaks-container {
   max-width: 500px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fefefe;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 80px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
   text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: transform 0.2s ease-in-out;
+}
+
+.streaks-container:hover {
+  transform: translateY(-3px);
 }
 
 .streaks-container h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 15px;
-  color: #e67e22;
+  color: #ff6b35;
 }
 
 .streaks-container p {
-  font-size: 1.2rem;
-  margin: 10px 0;
+  font-size: 1.1rem;
+  margin: 8px 0;
+  color: #444;
 }
 
+.streaks-container strong {
+  font-size: 1.5rem;
+  color: #ff6b35;
+}
+
+/* Buttons */
 .streaks-container button {
-  margin: 10px;
+  margin: 12px 8px;
   padding: 12px 20px;
   font-size: 1rem;
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: 0.2s ease-in-out;
 }
 
 .streaks-container button:first-of-type {
-  background: #27ae60;
+  background: #4caf50;
   color: white;
+}
+
+.streaks-container button:first-of-type:hover {
+  background: #43a047;
 }
 
 .streaks-container button:last-of-type {
-  background: #c0392b;
+  background: #e53935;
   color: white;
 }
 
-.streaks-container button:hover {
-  transform: translateY(-2px);
+.streaks-container button:last-of-type:hover {
+  background: #c62828;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .streaks-container {
+    margin: 40px 15px;
+    padding: 20px;
+  }
+
+  .streaks-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .streaks-container button {
+    width: 100%;
+    margin: 10px 0;
+  }
 }
