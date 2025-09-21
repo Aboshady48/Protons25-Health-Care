@@ -1,0 +1,44 @@
+.streaks-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.streaks-container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #e67e22;
+}
+
+.streaks-container p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.streaks-container button {
+  margin: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.streaks-container button:first-of-type {
+  background: #27ae60;
+  color: white;
+}
+
+.streaks-container button:last-of-type {
+  background: #c0392b;
+  color: white;
+}
+
+.streaks-container button:hover {
+  transform: translateY(-2px);
+}
