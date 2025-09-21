@@ -1,0 +1,110 @@
+/* frontend/src/Style/StreaksPage.css */
+
+.streaks-container {
+  max-width: 480px;
+  margin: 80px auto;
+  padding: 28px;
+  background: rgba(62, 95, 68, 0.9); /* main app bg with transparency */
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
+  transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+
+.streaks-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.streaks-container h2 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: #93da97; /* accent green */
+}
+
+.streaks-container p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: #e0e0e0;
+}
+
+.streaks-container strong {
+  font-size: 1.4rem;
+  color: #93da97;
+}
+
+/* 🔹 Buttons */
+.streaks-container button {
+  margin: 12px 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  min-width: 150px;
+}
+
+/* ✅ Complete Button */
+.streaks-container button:first-of-type {
+  background: #93da97;
+  color: #2c3e50;
+  border: 1px solid rgba(147, 218, 151, 0.4);
+}
+
+.streaks-container button:first-of-type:hover {
+  background: #ffffff;
+  color: #2c3e50;
+  box-shadow: 0 6px 14px rgba(147, 218, 151, 0.35);
+  transform: translateY(-2px);
+}
+
+/* ❌ Reset Button */
+.streaks-container button:last-of-type {
+  background: #ef4444;
+  color: #ffffff;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.streaks-container button:last-of-type:hover {
+  background: #dc2626;
+  box-shadow: 0 6px 14px rgba(239, 68, 68, 0.35);
+  transform: translateY(-2px);
+}
+
+/* 🔹 Responsive */
+@media (max-width: 768px) {
+  .streaks-container {
+    margin: 50px 20px;
+    padding: 22px;
+  }
+
+  .streaks-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .streaks-container p {
+    font-size: 1rem;
+  }
+
+  .streaks-container button {
+    width: 100%;
+    margin: 10px 0;
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .streaks-container {
+    margin: 30px 12px;
+    padding: 18px;
+  }
+
+  .streaks-container h2 {
+    font-size: 1.4rem;
+  }
+}

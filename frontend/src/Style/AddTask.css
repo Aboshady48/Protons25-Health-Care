@@ -2,16 +2,17 @@
   max-width: 700px;
   margin: 40px auto;
   padding: 30px;
-  background: #ffffff;
+  background: #3e5f44;
   border-radius: 20px;
-  box-shadow: 0px 6px 15px rgba(0,0,0,0.1);
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
   text-align: center;
+  border: 1px solid rgba(147, 218, 151, 0.2);
 }
 
 .AddTask-title {
   font-size: 2rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #ffffff;
   margin-bottom: 50px;
 }
 
@@ -20,7 +21,7 @@
   font-size: 1.2rem;
   font-weight: normal;
   margin-top: 5px;
-  color: #3e5f44;
+  color: #93da97;
 }
 
 .AddTask-form {
@@ -35,23 +36,30 @@
   max-width: 400px; 
   padding: 10px 12px;
   font-size: 1rem;
-  border: 2px solid #ddd;
+  border: 2px solid rgba(147, 218, 151, 0.3);
   border-radius: 4px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: rgba(147, 218, 151, 0.1);
+  color: #ffffff;
 }
 
 .AddText-input:focus {
-  border-color: #3e5f44;
-  box-shadow: 0 0 5px rgba(39, 174, 96, 0.4);
+  border-color: #93da97;
+  box-shadow: 0 0 8px rgba(147, 218, 151, 0.5);
+  background: rgba(147, 218, 151, 0.15);
+}
+
+.AddText-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .AddTask-button {
   padding: 8px 20px; 
   font-size: 0.95rem;
   font-weight: bold;
-  background: #3e5f44;
-  color: #fff;
+  background: #93da97;
+  color: #2c3e50;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -60,8 +68,10 @@
 }
 
 .AddTask-button:hover {
-  background: #619d6c;
+  background: #ffffff;
+  color: #000;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(147, 218, 151, 0.3);
 }
 
 .AddTask-button:active {
