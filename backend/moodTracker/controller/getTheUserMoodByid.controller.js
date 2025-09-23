@@ -12,11 +12,8 @@ const getTheUserMoodByidController = async (req, res) => {
     `;
     const result = await pool.query(query, [userId]);
 
-    if (result.rows.length === 0) {
-      return res.status(404).json({ message: "No moods found for this user" });
-    }
-
-    return res.status(200).json({ moods: result.rows });
+    // Always return 200, even if no moods
+    return res.status(200).json({ moods: result.rows || [] });
   } catch (error) {
     console.error("Error in getTheUserMoodByidController:", error);
     return res.status(500).json({ message: "Internal server error" });
