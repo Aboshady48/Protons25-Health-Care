@@ -11,6 +11,8 @@ import { GetTaskById } from "./components/dailyPlanner/GetTaskById.jsx";
 import EditTask from "./components/dailyPlanner/EditTask.jsx";
 import { AboutUs } from "./components/AboutUs.jsx";
 import StreaksPage from "./components/StreaksPage.jsx";
+import { AddYourMood } from "./components/moodTracker/AddYourMood.jsx";
+import { ShowYourMoods } from "./components/moodTracker/ShowYourMoods.jsx";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -41,6 +43,10 @@ const App = () => {
         <Route path="/tasks" element={<ProtectedRoute><GetAllTasks /></ProtectedRoute>} />
         <Route path="/tasks/:id" element={<ProtectedRoute><GetTaskById /></ProtectedRoute>} />
         <Route path="/tasks/:id/edit" element={<ProtectedRoute><EditTask /></ProtectedRoute>} />
+
+        {/* Mood Tracker Routes */}
+        <Route path="/mood/add" element={<ProtectedRoute><AddYourMood /></ProtectedRoute>} />
+        <Route path="/mood/me" element={<ProtectedRoute><ShowYourMoods /></ProtectedRoute>} />
 
         {/* Catch-all route */}
         <Route path="*" element={<Navigate to={token ? "/" : "/login"} />} />

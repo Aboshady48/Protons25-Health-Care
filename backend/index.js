@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 5000;
 const pool = require("./config/db");
 const authRouter = require("./auth/router/auth.router");
 const taskRouter = require("./dailyPlanner/router/tasks.router");
-const MoodRouter = require("./moodAndEnergy/router/moodAndEnergy.router");
+const MoodRouter = require("./moodTracker/router/moodAndEnergy.router");
 const cors = require("cors");
 
 
