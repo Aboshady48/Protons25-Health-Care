@@ -7,18 +7,17 @@ const loginController = async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        //check if user exists
+        // check if user exists
         const query = 'SELECT * FROM users WHERE username = $1';
         const result = await pool.query(query, [username]);
 
-        // check if user not found
         if (result.rows.length === 0) {
             return res.status(400).json({ message: 'Invalid username or password' });
         }
 
         const user = result.rows[0];
 
-        // check if password is valid
+        // check password
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return res.status(400).json({ message: 'Invalid username or password' });
@@ -26,17 +25,20 @@ const loginController = async (req, res) => {
 
         // generate token
         const token = jwt.sign(
-            { id: user.id, username: user.username },
+            { id: user.id, username: user.username, role: user.role },
             SECRET_KEY,
-
-            //1year
             { expiresIn: '1y' }
         );
 
-        // return user data
         return res.status(200).json({
             message: 'Login successful',
-            user: { id: user.id, username: user.username, username: user.username },
+            user: {
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                role: user.role,
+                created_at: user.created_at
+            },
             token
         });
 
@@ -45,6 +47,5 @@ const loginController = async (req, res) => {
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
-
 
 module.exports = { loginController };

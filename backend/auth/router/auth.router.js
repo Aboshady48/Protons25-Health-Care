@@ -3,7 +3,7 @@ const authRouter = express.Router();
 const { registerController } = require('../controller/register.controller');
 const { loginController } = require('../controller/login.controller');
 const { getAllUsersController } = require('../controller/getAllUsers.controller');
-const {getUserByIdController} = require('../controller/getUserById.controller');
+const { getUserByIdController } = require('../controller/getUserById.controller');
 
 authRouter.post('/register', registerController);
 authRouter.post('/login', loginController);

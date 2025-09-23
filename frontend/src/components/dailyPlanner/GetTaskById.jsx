@@ -1,3 +1,4 @@
+// components/dailyPlanner/GetTaskById.jsx
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -11,6 +12,29 @@ export const GetTaskById = () => {
   const [error, setError] = useState(null);
   const [deleting, setDeleting] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  // Map priority numbers to readable labels + CSS classes
+  const getPriorityLabel = (priority) => {
+    const map = {
+      1: "Very Low",
+      2: "Low",
+      3: "Medium",
+      4: "High",
+      5: "Very High",
+    };
+    return map[priority] || `Priority ${priority}`;
+  };
+
+  const getPriorityClass = (priority) => {
+    const map = {
+      1: "priority-low",
+      2: "priority-low",
+      3: "priority-medium",
+      4: "priority-high",
+      5: "priority-high",
+    };
+    return map[priority] || "priority-medium";
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -177,20 +201,34 @@ export const GetTaskById = () => {
           </>
         )}
 
+        {/* ✅ Completed Field */}
+        {"completed" in task && (
+          <div className="task-completed">
+            <strong>Completed:</strong>
+            <span
+              className={task.completed ? "status-completed" : "status-pending"}
+            >
+              {task.completed ? "✅ Yes" : "❌ No"}
+            </span>
+          </div>
+        )}
+
+        {/* ✅ Status */}
         {task.status && (
           <div className="task-status">
             <strong>Status:</strong>
-            <span className={`status-${task.status.toLowerCase()}`}>
+            <span className={`status-${String(task.status).toLowerCase()}`}>
               {task.status}
             </span>
           </div>
         )}
 
+        {/* ✅ Priority (mapped) */}
         {task.priority && (
           <div className="task-priority">
             <strong>Priority:</strong>
-            <span className={`priority-${task.priority.toLowerCase()}`}>
-              {task.priority}
+            <span className={getPriorityClass(task.priority)}>
+              {getPriorityLabel(task.priority)}
             </span>
           </div>
         )}

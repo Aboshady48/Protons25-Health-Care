@@ -1,33 +1,86 @@
+-- USERS TABLE
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    password TEXT NOT NULL,
+    role VARCHAR(20) DEFAULT 'user' CHECK(role IN ('user', 'admin')),
+    password VARCHAR(255) NOT NULL, -- store hashed password
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
---Daily Planner
+
+-- TASKS TABLE (Daily Planner)
 CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     title VARCHAR(255) NOT NULL,
     description TEXT,
+    priority INT CHECK(priority BETWEEN 1 AND 5), -- 1=lowest, 5=highest
+    completed BOOLEAN DEFAULT FALSE,
     scheduled_time TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE mood_energy (
+-- MOOD TRACKER TABLE
+CREATE TYPE mood_enum AS ENUM ('Happy', 'Sad', 'Anxious', 'Neutral', 'Excited', 'Stressed');
+CREATE TABLE mood_tracker (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    mood INT CHECK(mood BETWEEN 1 AND 10),     
-    energy INT CHECK(energy BETWEEN 1 AND 10), 
-    logged_at DATE DEFAULT CURRENT_DATE
+    mood mood_enum, -- ENUM for consistency
+    intensity INT CHECK(intensity BETWEEN 1 AND 10),
+    task_id INT REFERENCES tasks(id) ON DELETE SET NULL, 
+    notes TEXT,
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- BIORHYTHM TABLE
+CREATE TYPE chronotype_enum AS ENUM ('Morning', 'Evening', 'Intermediate');
 CREATE TABLE biorhythm (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    chronotype VARCHAR(50), -- "Morning", "Evening", "Intermediate"
-    score INT,
+    chronotype chronotype_enum,
+    score INT CHECK(score BETWEEN 0 AND 100), -- enforce valid range
     assessed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- STREAKS TABLE
+CREATE TABLE streaks (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    task_id INT REFERENCES tasks(id) ON DELETE CASCADE,
+    streak_count INT DEFAULT 0,
+    last_completed TIMESTAMP -- use timestamp for precision
+);
+
+-- CHOOSES TABLE (Admin-only choices)
+CREATE TABLE chooses (
+    id SERIAL PRIMARY KEY,
+    admin_id INT REFERENCES users(id) ON DELETE CASCADE,
+    choice VARCHAR(255) NOT NULL,
+    description TEXT,
+    score INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Trigger function to enforce admin_id references an admin user
+CREATE OR REPLACE FUNCTION enforce_admin_only()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM users WHERE id = NEW.admin_id AND role = 'admin') THEN
+        RAISE EXCEPTION 'admin_id must reference an admin user';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger on chooses table
+CREATE TRIGGER admin_check
+BEFORE INSERT OR UPDATE ON chooses
+FOR EACH ROW
+EXECUTE FUNCTION enforce_admin_only();
+
+-- Recommended Indexes for performance
+CREATE INDEX idx_tasks_user ON tasks(user_id);
+CREATE INDEX idx_mood_user ON mood_tracker(user_id);
+CREATE INDEX idx_bio_user ON biorhythm(user_id);
+CREATE INDEX idx_streaks_user_task ON streaks(user_id, task_id);
+CREATE INDEX idx_chooses_admin ON chooses(admin_id);
