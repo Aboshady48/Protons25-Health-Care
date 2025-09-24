@@ -1,10 +1,8 @@
-/* frontend/src/Style/StreaksPage.css */
-
 .streaks-container {
-  max-width: 480px;
+  max-width: 1200px; /* Increased to accommodate three cards */
   margin: 80px auto;
   padding: 28px;
-  background: rgba(62, 95, 68, 0.9); /* main app bg with transparency */
+  background: rgba(62, 95, 68, 0.9); /* Main app bg with transparency */
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   text-align: center;
@@ -20,24 +18,49 @@
 
 .streaks-container h2 {
   font-size: 2rem;
-  margin-bottom: 16px;
-  color: #93da97; /* accent green */
+  margin-bottom: 24px;
+  color: #93da97; /* Accent green */
 }
 
-.streaks-container p {
+.streaks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  gap: 20px; /* Space between cards */
+  margin: 0 auto;
+}
+
+.streak-item {
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+.streak-item:hover {
+  transform: translateY(-2px);
+}
+
+.streak-item h3 {
+  font-size: 1.5rem;
+  margin: 0 0 10px;
+  color: #ffffff;
+}
+
+.streak-item p {
   font-size: 1.1rem;
-  margin: 10px 0;
+  margin: 8px 0;
   color: #e0e0e0;
 }
 
-.streaks-container strong {
+.streak-item strong {
   font-size: 1.4rem;
   color: #93da97;
 }
 
-/* 🔹 Buttons */
-.streaks-container button {
-  margin: 12px 8px;
+/* Buttons */
+.streak-item button {
+  margin: 8px 8px 0 0;
   padding: 12px 20px;
   font-size: 1rem;
   font-weight: 600;
@@ -45,66 +68,306 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
-  min-width: 150px;
+  min-width: 120px;
 }
 
-/* ✅ Complete Button */
-.streaks-container button:first-of-type {
+/* Mark Completed Button */
+.streak-item button.completed {
   background: #93da97;
   color: #2c3e50;
   border: 1px solid rgba(147, 218, 151, 0.4);
 }
 
-.streaks-container button:first-of-type:hover {
+.streak-item button.completed:hover:not(.disabled) {
   background: #ffffff;
   color: #2c3e50;
   box-shadow: 0 6px 14px rgba(147, 218, 151, 0.35);
   transform: translateY(-2px);
 }
 
-/* ❌ Reset Button */
-.streaks-container button:last-of-type {
+.streak-item button.completed.disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  border: none;
+}
+
+/* Reset Streak Button */
+.streak-item button.reset {
   background: #ef4444;
   color: #ffffff;
   border: 1px solid rgba(239, 68, 68, 0.4);
 }
 
-.streaks-container button:last-of-type:hover {
+.streak-item button.reset:hover {
   background: #dc2626;
   box-shadow: 0 6px 14px rgba(239, 68, 68, 0.35);
   transform: translateY(-2px);
 }
 
-/* 🔹 Responsive */
-@media (max-width: 768px) {
+/* Responsive */
+@media (max-width: 1024px) {
   .streaks-container {
+    max-width: 800px;
     margin: 50px 20px;
     padding: 22px;
+  }
+
+  .streaks-grid {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on medium screens */
+  }
+
+  .streaks-container h2 {
+    font-size: 1.8rem;
+  }
+
+  .streak-item {
+    padding: 16px;
+  }
+
+  .streak-item h3 {
+    font-size: 1.3rem;
+  }
+
+  .streak-item p {
+    font-size: 1rem;
+  }
+
+  .streak-item button {
+    width: 100%;
+    margin: 8px 0;
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .streaks-container {
+    margin: 40px 15px;
+    padding: 18px;
+  }
+
+  .streaks-grid {
+    grid-template-columns: 1fr; /* One column on small screens */
   }
 
   .streaks-container h2 {
     font-size: 1.6rem;
   }
 
-  .streaks-container p {
-    font-size: 1rem;
-  }
-
-  .streaks-container button {
-    width: 100%;
-    margin: 10px 0;
-    font-size: 0.95rem;
-    padding: 12px;
+  .streak-item {
+    padding: 14px;
   }
 }
 
 @media (max-width: 400px) {
   .streaks-container {
-    margin: 30px 12px;
-    padding: 18px;
+    margin: 30px 10px;
+    padding: 16px;
   }
 
   .streaks-container h2 {
     font-size: 1.4rem;
+  }
+
+  .streak-item {
+    padding: 12px;
+  }
+}
+
+/* Calendar Styles (kept for potential use) */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.calendar-day {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.calendar-day.header {
+  font-weight: 700;
+  background: transparent;
+  color: #93da97;
+}
+
+.calendar-day.empty {
+  background: transparent;
+}
+
+.calendar-day.completed {
+  background: #93da97;
+  color: #2c3e50;
+}
+.calendar-day.completed {
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.calendar-day.completed:hover {
+  background-color: #45a049;
+}
+
+.day-logs {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.calendar-container {
+  margin-top: 2rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-top: 1rem;
+}
+
+.calendar-day {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: white;
+}
+
+.calendar-day.completed {
+  background: #22c55e; /* green */
+}
+
+.calendar-day.missed {
+  background: #ef4444; /* red */
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 14px;
+}
+
+.legend {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.legend.completed {
+  background: #22c55e;
+}
+
+.legend.missed {
+  background: #ef4444;
+}
+
+/* ✅ Calendar Legend Styles */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1rem 0 2rem;
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Legend Colors */
+.legend-box.completed {
+  background: #22c55e; /* green */
+}
+.legend-box.active {
+  background: #3b82f6; /* blue */
+}
+.legend-box.inactive {
+  background: #9ca3af; /* gray */
+}
+
+/* ✅ Calendar Day States */
+.calendar-day.completed {
+  background: #22c55e;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.calendar-day.active {
+  background: #3b82f6;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.calendar-day.inactive {
+  background: #9ca3af;
+  color: #2c2c2c;
+  font-weight: 500;
+}
+
+/* ✅ Hover effect */
+.calendar-day.completed:hover,
+.calendar-day.active:hover {
+  filter: brightness(1.15);
+  cursor: pointer;
+}
+
+
+/* ✅ Legend Cards with Colors */
+.completed-card {
+  background: #22c55e; /* green */
+  color: #fff;
+}
+.active-card {
+  background: #3b82f6; /* blue */
+  color: #fff;
+}
+.inactive-card {
+  background: #9ca3af; /* gray */
+  color: #fff;
+}
+
+/* Responsive grid fixes */
+.streaks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 0 auto;
+}
+@media (max-width: 1024px) {
+  .streaks-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .streaks-grid {
+    grid-template-columns: 1fr;
   }
 }

@@ -10,9 +10,11 @@ import GetAllTasks from "./components/dailyPlanner/GetAllTasks.jsx";
 import { GetTaskById } from "./components/dailyPlanner/GetTaskById.jsx";
 import EditTask from "./components/dailyPlanner/EditTask.jsx";
 import { AboutUs } from "./components/AboutUs.jsx";
-import StreaksPage from "./components/StreaksPage.jsx";
 import { AddYourMood } from "./components/moodTracker/AddYourMood.jsx";
 import { ShowYourMoods } from "./components/moodTracker/ShowYourMoods.jsx";
+import StreaksPage from "./components/streak/StreaksPage.jsx";
+import StreakCalendar from "./components/streak/StreakCalendar.jsx";
+
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -35,7 +37,6 @@ const App = () => {
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/about" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
         <Route path="/community" element={<ProtectedRoute><div>Community Page</div></ProtectedRoute>} />
-        <Route path="/streak" element={<ProtectedRoute><StreaksPage /></ProtectedRoute>} />
         <Route path="/blog" element={<ProtectedRoute><div>Blog Page</div></ProtectedRoute>} />
         <Route path="/ask" element={<ProtectedRoute><div>Ask Page</div></ProtectedRoute>} />
 
@@ -47,6 +48,10 @@ const App = () => {
         {/* Mood Tracker Routes */}
         <Route path="/mood/add" element={<ProtectedRoute><AddYourMood /></ProtectedRoute>} />
         <Route path="/mood/me" element={<ProtectedRoute><ShowYourMoods /></ProtectedRoute>} />
+
+        {/* Streak Routes */}
+        <Route path="/streak" element={<ProtectedRoute><StreaksPage /></ProtectedRoute>} />
+        <Route path="/streak/calendar" element={<ProtectedRoute><StreakCalendar /></ProtectedRoute>} />
 
         {/* Catch-all route */}
         <Route path="*" element={<Navigate to={token ? "/" : "/login"} />} />

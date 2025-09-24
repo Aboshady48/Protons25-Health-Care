@@ -7,6 +7,7 @@ const authRouter = require("./auth/router/auth.router");
 const taskRouter = require("./dailyPlanner/router/tasks.router");
 const MoodRouter = require("./moodTracker/router/moodAndEnergy.router");
 const cors = require("cors");
+const streakRouter = require("./streak/router/index");
 
 
 //cors
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/tasks", taskRouter);
 app.use("/api/mood", MoodRouter);
+app.use("/api/streak",streakRouter);
 
 
 
