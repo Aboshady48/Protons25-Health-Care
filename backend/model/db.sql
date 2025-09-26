@@ -84,3 +84,17 @@ CREATE INDEX idx_mood_user ON mood_tracker(user_id);
 CREATE INDEX idx_bio_user ON biorhythm(user_id);
 CREATE INDEX idx_streaks_user_task ON streaks(user_id, task_id);
 CREATE INDEX idx_chooses_admin ON chooses(admin_id);
+
+-- STREAK LOGS (store each completed day)
+CREATE TABLE streak_logs (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    task_id INT REFERENCES tasks(id) ON DELETE CASCADE,
+    completed_date DATE NOT NULL, -- store only date (no time)
+    details TEXT, -- optional notes/details
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (user_id, task_id, completed_date) -- prevent duplicates
+);
+
+-- Index for faster lookups
+CREATE INDEX idx_streak_logs_user_date ON streak_logs(user_id, completed_date);
