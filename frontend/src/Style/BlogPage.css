@@ -1,0 +1,141 @@
+.Blog-Page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.Blog-Title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #dfe9e6; 
+}
+
+.Blog-subtitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: #f5eeee;
+}
+
+.Blog-List {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.Blog-Card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+}
+
+.Blog-Card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.Blog-Card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.Blog-Card h2 {
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.Blog-Card .date {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+.Blog-Card .preview {
+  font-size: 1rem;
+  color: #555;
+}
+
+.Blog-Article {
+  max-width: 500px;
+  margin: auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.Blog-Article h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #2d604f;
+}
+
+.Blog-Article .date {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.Blog-Article img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.Blog-Article .content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.back-btn {
+  margin-bottom: 1rem;
+  background: #5aa76f;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #478d5b;
+}
+
+@media (max-width: 768px) {
+  .Blog-Title {
+    font-size: 2rem;
+  }
+
+  .Blog-Article {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .Blog-Title {
+    font-size: 1.6rem;
+  }
+
+  .Blog-Card img {
+    height: 150px;
+  }
+
+  .Blog-Article {
+    padding: 1rem;
+  }
+}

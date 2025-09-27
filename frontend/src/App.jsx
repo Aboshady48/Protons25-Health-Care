@@ -11,7 +11,7 @@ import { GetTaskById } from "./components/dailyPlanner/GetTaskById.jsx";
 import EditTask from "./components/dailyPlanner/EditTask.jsx"; // Add this import
 import { AboutUs } from "./components/AboutUs.jsx";
 import StreaksPage from "./components/StreaksPage.jsx";
-
+import BlogPage from "./components/BlogPage.jsx";
 const App = () => {
   const token = localStorage.getItem("token");
 
@@ -28,7 +28,7 @@ const App = () => {
         <Route path="/about" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
         <Route path="/community" element={<ProtectedRoute><div>Community Page</div></ProtectedRoute>} />
         <Route path="/streak" element={<ProtectedRoute><StreaksPage /></ProtectedRoute>} />
-        <Route path="/blog" element={<ProtectedRoute><div>Blog Page</div></ProtectedRoute>} />
+        <Route path="/blog" element={<ProtectedRoute><BlogPage /></ProtectedRoute>} />
         <Route path="/ask" element={<ProtectedRoute><div>Ask Page</div></ProtectedRoute>} />
         
         {/* Task Routes - Protected */}
