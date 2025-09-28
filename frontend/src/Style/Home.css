@@ -1,0 +1,61 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  background: linear-gradient(135deg, #3e5f44, #3e5f44);
+}
+
+.home-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #bbdcc1;
+  margin-bottom: 2rem;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.home-card {
+  border-radius: 1.5rem;
+  padding: 2rem;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: #bbdcc1;
+}
+
+.home-card:hover {
+  transform: translateY(-6px) scale(1.05);
+  background: linear-gradient(135deg, #e6fffa, #f0fdf4);
+}
+
+.home-icon {
+  font-size: 3rem;
+  stroke-width: 1.8;
+  color: #38a169;
+  margin-bottom: 1rem;
+}
+
+.home-label {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2f855a;
+}
+
+.home-icon {
+  width: 64px;
+  height: 64px;
+  color: #3e5f44; 
+}

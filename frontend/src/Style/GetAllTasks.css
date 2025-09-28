@@ -328,3 +328,51 @@
 .task-item:hover::after {
   transform: scaleY(1);
 }
+/* Task meta badges */
+.task-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.priority-badge,
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* Priority colors */
+.priority-highest {
+  background: #e74c3c; /* Red */
+  color: #fff;
+}
+.priority-high {
+  background: #e67e22; /* Orange */
+  color: #fff;
+}
+.priority-medium {
+  background: #f1c40f; /* Yellow */
+  color: #2c3e50;
+}
+.priority-low {
+  background: #3498db; /* Blue */
+  color: #fff;
+}
+.priority-lowest {
+  background: #95a5a6; /* Gray */
+  color: #fff;
+}
+
+/* Status */
+.status-badge.completed {
+  background: #93da9786; /* Green */
+  color: #fff;
+}
+
+.status-badge.pending {
+  background: #f39c12; /* Amber */
+  color: #fff;
+}

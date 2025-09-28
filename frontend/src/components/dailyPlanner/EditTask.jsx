@@ -1,62 +1,60 @@
 // components/dailyPlanner/EditTask.jsx
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../../Style/EditTas.css"; // Make sure this CSS file exists
+import "../../Style/EditTas.css";
 
 const EditTask = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState(1);
+  const [completed, setCompleted] = useState(false);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [saving, setSaving] = useState(false);
 
-  // Fetch task data on component mount
+  // Fetch task data
   useEffect(() => {
     const fetchTask = async () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         const token = localStorage.getItem("token");
         if (!token) {
-          console.error("No token found, please log in first.");
-          navigate('/login');
+          navigate("/login");
           return;
         }
 
-        // Use GET to fetch task data, not PUT
         const response = await axios.get(
           `http://localhost:5000/api/tasks/${id}`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
             withCredentials: true,
           }
         );
 
-        // Set the task data
         setTitle(response.data.title || "");
         setDescription(response.data.description || "");
+        setPriority(response.data.priority || 1);
+        setCompleted(response.data.completed || false);
       } catch (error) {
         console.error("Error fetching task:", error.response?.data || error.message);
-        if (error.response?.status === 404) {
-          setError("Task not found");
-        } else {
-          setError(error.response?.data?.error || "Failed to fetch task");
-        }
+        setError(
+          error.response?.status === 404
+            ? "Task not found"
+            : error.response?.data?.error || "Failed to fetch task"
+        );
       } finally {
         setLoading(false);
       }
     };
 
-    if (id) {
-      fetchTask();
-    }
+    if (id) fetchTask();
   }, [id, navigate]);
 
   const onSubmitForm = async (e) => {
@@ -67,52 +65,40 @@ const EditTask = () => {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("You must log in first!");
-        navigate('/login');
+        navigate("/login");
         return;
       }
 
-      // Validate required fields
       if (!title.trim()) {
         alert("Title is required!");
         setSaving(false);
         return;
       }
 
-      const body = { 
+      const body = {
         title: title.trim(),
-        description: description.trim()
+        description: description.trim(),
+        priority,
+        completed,
       };
 
-      await axios.put(
-        `http://localhost:5000/api/tasks/${id}`,
-        body,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      );
+      await axios.put(`http://localhost:5000/api/tasks/${id}`, body, {
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+      });
 
       alert("Task updated successfully!");
-      navigate("/"); // Navigate back to tasks list
+      navigate("/tasks/all");
     } catch (error) {
       console.error("Error updating task:", error.response?.data || error.message);
-      if (error.response?.status === 404) {
-        setError("Task not found");
-      } else {
-        setError(error.response?.data?.message || "Failed to update task");
-      }
+      setError(error.response?.data?.message || "Failed to update task");
     } finally {
       setSaving(false);
     }
   };
 
-  const handleCancel = () => {
-    navigate("/");
-  };
+  const handleCancel = () => navigate("/tasks/all");
 
-  // Loading state
   if (loading) {
     return (
       <div className="edit-task-loading">
@@ -125,7 +111,6 @@ const EditTask = () => {
     );
   }
 
-  // Error state
   if (error) {
     return (
       <div className="edit-task-error">
@@ -145,11 +130,11 @@ const EditTask = () => {
   return (
     <div className="EditTask-container">
       <div className="edit-task-header">
-      
         <h2>Edit Task #{id}</h2>
       </div>
 
       <form onSubmit={onSubmitForm} className="EditTask-form">
+        {/* Title */}
         <div className="form-group">
           <label htmlFor="title">Task Title *</label>
           <input
@@ -163,6 +148,7 @@ const EditTask = () => {
           />
         </div>
 
+        {/* Description */}
         <div className="form-group">
           <label htmlFor="description">Task Description</label>
           <textarea
@@ -175,17 +161,47 @@ const EditTask = () => {
           />
         </div>
 
+        {/* Priority */}
+        <div className="form-group">
+          <label htmlFor="priority">Priority</label>
+          <select
+            id="priority"
+            className={`todo-input priority-${priority}`}
+            value={priority}
+            onChange={(e) => setPriority(Number(e.target.value))}
+          >
+            <option value={1}>Priority 1 (Lowest)</option>
+            <option value={2}>Priority 2</option>
+            <option value={3}>Priority 3</option>
+            <option value={4}>Priority 4</option>
+            <option value={5}>Priority 5 (Highest)</option>
+          </select>
+        </div>
+
+        {/* Completed */}
+        <div className="form-group">
+          <label className={`completed-label ${completed ? "done" : "pending"}`}>
+            <input
+              type="checkbox"
+              checked={completed}
+              onChange={(e) => setCompleted(e.target.checked)}
+            />
+            {completed ? "✅ Task Completed" : "❌ Not Completed"}
+          </label>
+        </div>
+
+        {/* Actions */}
         <div className="form-actions">
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="cancel-btn"
             onClick={handleCancel}
             disabled={saving}
           >
             Cancel
           </button>
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="update-btn"
             disabled={saving || !title.trim()}
           >

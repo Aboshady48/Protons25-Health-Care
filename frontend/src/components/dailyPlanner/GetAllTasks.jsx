@@ -18,19 +18,17 @@ const GetAllTasks = () => {
         return;
       }
 
-      const response = await axios.get(
-        "http://localhost:5000/api/tasks/all",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get("http://localhost:5000/api/tasks/all", {
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+      });
 
       setTasks((response.data.tasks || []).reverse());
     } catch (error) {
-      console.error("Error fetching tasks:", error.response?.data || error.message);
+      console.error(
+        "Error fetching tasks:",
+        error.response?.data || error.message
+      );
     }
   };
 
@@ -55,6 +53,22 @@ const GetAllTasks = () => {
   const currentTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
   const totalPages = Math.ceil(tasks.length / tasksPerPage);
 
+  // Map priority to color + label
+  const getPriorityClass = (priority) => {
+    switch (priority) {
+      case 5:
+        return "priority-highest";
+      case 4:
+        return "priority-high";
+      case 3:
+        return "priority-medium";
+      case 2:
+        return "priority-low";
+      default:
+        return "priority-lowest";
+    }
+  };
+
   return (
     <div className="GetAllTasks-container">
       <h2>All Tasks</h2>
@@ -67,25 +81,38 @@ const GetAllTasks = () => {
                   <strong className="task-title">{task.title}</strong>
                   <span className="task-id">#{task.id}</span>
                 </div>
-                
+
                 {task.description && (
                   <p className="task-description-preview">
-                    {task.description.length > 50 
-                      ? `${task.description.substring(0, 50)}...` 
-                      : task.description
-                    }
+                    {task.description.length > 50
+                      ? `${task.description.substring(0, 50)}...`
+                      : task.description}
                   </p>
                 )}
-                
+
+                {/* NEW: Priority + Completed badges */}
+                <div className="task-meta">
+                  <span className={`priority-badge ${getPriorityClass(task.priority)}`}>
+                    Priority {task.priority}
+                  </span>
+                  <span
+                    className={`status-badge ${
+                      task.completed ? "completed" : "pending"
+                    }`}
+                  >
+                    {task.completed ? "Completed ✅" : "Pending ⏳"}
+                  </span>
+                </div>
+
                 <div className="task-actions">
-                  <button 
+                  <button
                     className="action-btn view-btn"
                     onClick={() => handleViewTaskClick(task.id)}
                     title="View details"
                   >
                     View Details →
                   </button>
-                  <button 
+                  <button
                     className="action-btn edit-btn"
                     onClick={() => handleEditTaskClick(task.id)}
                     title="Edit task"

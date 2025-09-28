@@ -77,3 +77,19 @@
 .AddTask-button:active {
   transform: translateY(0);
 }
+
+.AddTask-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #93da97;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.AddTask-checkbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: #93da97; /* modern browsers */
+  cursor: pointer;
+}
