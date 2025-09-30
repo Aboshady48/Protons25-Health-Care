@@ -17,50 +17,58 @@ import StreaksPage from "./components/streak/StreaksPage.jsx";
 import StreakCalendar from "./components/streak/StreakCalendar.jsx";
 import Biorhythm from "./components/Biorhythm.jsx";
 import AddTask from "./components/dailyPlanner/AddTask.jsx";
+import Ask from "./components/Ask.jsx";
+import Footer from "./components/footer/footer.jsx";  
+import CommunityPage from "./components/community/CommunityPage.jsx";
+
 const App = () => {
   const token = localStorage.getItem("token");
 
   return (
     <>
       <Navbar />
-      <Routes>
-        {/* Public routes */}
-        <Route
-          path="/register"
-          element={!token ? <Register /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/login"
-          element={!token ? <Login /> : <Navigate to="/" />}
-        />
+      <div className="app-content">
+        <Routes>
+          {/* Public routes */}
+          <Route
+            path="/register"
+            element={!token ? <Register /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/login"
+            element={!token ? <Login /> : <Navigate to="/" />}
+          />
 
-        {/* Protected routes */}
-        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/about" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
-        <Route path="/community" element={<ProtectedRoute><div>Community Page</div></ProtectedRoute>} />
-        <Route path="/streak" element={<ProtectedRoute><StreaksPage /></ProtectedRoute>} />
-        <Route path="/blog" element={<ProtectedRoute><BlogPage /></ProtectedRoute>} />
-        <Route path="/ask" element={<ProtectedRoute><div>Ask Page</div></ProtectedRoute>} />
+          {/* Protected routes */}
+          <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/about" element={<ProtectedRoute><AboutUs /></ProtectedRoute>} />
+          <Route path="/community" element={<ProtectedRoute><CommunityPage /></ProtectedRoute>} />
+          <Route path="/streak" element={<ProtectedRoute><StreaksPage /></ProtectedRoute>} />
+          <Route path="/blog" element={<ProtectedRoute><BlogPage /></ProtectedRoute>} />
+          <Route path="/ask" element={<ProtectedRoute><Ask /></ProtectedRoute>} />
 
-        {/* Task Routes */}
-        <Route path="/tasks" element={<ProtectedRoute><GetAllTasks /></ProtectedRoute>} />
-        <Route path="/tasks/:id" element={<ProtectedRoute><GetTaskById /></ProtectedRoute>} />
-        <Route path="/tasks/:id/edit" element={<ProtectedRoute><EditTask /></ProtectedRoute>} />
-        <Route path="/tasks/add" element={<ProtectedRoute><AddTask /></ProtectedRoute>} />
+          {/* Task Routes */}
+          <Route path="/tasks" element={<ProtectedRoute><GetAllTasks /></ProtectedRoute>} />
+          <Route path="/tasks/:id" element={<ProtectedRoute><GetTaskById /></ProtectedRoute>} />
+          <Route path="/tasks/:id/edit" element={<ProtectedRoute><EditTask /></ProtectedRoute>} />
+          <Route path="/tasks/add" element={<ProtectedRoute><AddTask /></ProtectedRoute>} />
 
-        {/* Mood Tracker Routes */}
-        <Route path="/mood/add" element={<ProtectedRoute><AddYourMood /></ProtectedRoute>} />
-        <Route path="/mood/me" element={<ProtectedRoute><ShowYourMoods /></ProtectedRoute>} />
+          {/* Mood Tracker Routes */}
+          <Route path="/mood/add" element={<ProtectedRoute><AddYourMood /></ProtectedRoute>} />
+          <Route path="/mood/me" element={<ProtectedRoute><ShowYourMoods /></ProtectedRoute>} />
 
-        {/* Streak Routes */}
-        <Route path="/streak/calendar" element={<ProtectedRoute><StreakCalendar /></ProtectedRoute>} />
-        <Route path="/biorhythm" element={<ProtectedRoute><Biorhythm /></ProtectedRoute>}/>
+          {/* Streak Routes */}
+          <Route path="/streak/calendar" element={<ProtectedRoute><StreakCalendar /></ProtectedRoute>} />
+          <Route path="/biorhythm" element={<ProtectedRoute><Biorhythm /></ProtectedRoute>} />
 
-        {/* Catch-all route */}
-        <Route path="*" element={<Navigate to={token ? "/" : "/login"} />} />
-      </Routes>
+          {/* Catch-all route */}
+          <Route path="*" element={<Navigate to={token ? "/" : "/login"} />} />
+        </Routes>
+      </div>
+      <Footer />  
     </>
   );
 };
 
 export default App;
+

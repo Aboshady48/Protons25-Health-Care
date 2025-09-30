@@ -1,5 +1,3 @@
-
-/* Card Container */
 .container {
   background: #fff;
   max-width: 420px;
@@ -16,6 +14,7 @@
   align-items: center;         
   justify-content: center;      
   padding: 20px;
+  background:linear-gradient(#3E5F44,#5E936C) ;
 }
 
 .container:hover {

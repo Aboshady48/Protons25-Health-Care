@@ -1,0 +1,160 @@
+/* Container */
+.bio-rhythm-container {
+  max-width: 700px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.bio-rhythm-container h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+/* Question block */
+.question-block {
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.question-block h3 {
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 15px;
+  font-size: 1.25rem;
+}
+
+/* Options */
+.option-label {
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #2c3e50;
+  transition: color 0.2s ease;
+}
+
+.option-label:hover {
+  color: #2980b9;
+}
+
+.option-label input[type="radio"] {
+  margin-right: 12px;
+  cursor: pointer;
+  accent-color: #2980b9;
+}
+
+/* Submit button */
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 14px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #2980b9;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-button:hover {
+  background-color: #1c5980;
+}
+
+/* Result container */
+.result-container {
+  margin-top: 40px;
+  padding: 25px 30px;
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: inset 0 0 10px #e0e0e0;
+}
+
+.result-container h2 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.result-container h3 {
+  color: #34495e;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.result-container ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.result-container ul li {
+  margin-bottom: 12px;
+}
+
+/* Retake button */
+.retake-button {
+  display: block;
+  margin: 30px auto 0;
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2980b9;
+  background-color: transparent;
+  border: 2px solid #2980b9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: fit-content;
+}
+
+.retake-button:hover {
+  background-color: #2980b9;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .bio-rhythm-container {
+    padding: 15px;
+    margin: 20px;
+  }
+
+  .bio-rhythm-container h1 {
+    font-size: 2rem;
+  }
+
+  .question-block h3 {
+    font-size: 1.1rem;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+  }
+
+  .result-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .result-container h3 {
+    font-size: 1.25rem;
+  }
+}
