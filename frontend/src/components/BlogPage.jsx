@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../style/BlogPage.css";
+import "../Style/BlogPage.css";
 
 import biorhythmImg from "../assets/biorhythm.png";
 import dailyplannerImg from "../assets/dailyplanner.png";

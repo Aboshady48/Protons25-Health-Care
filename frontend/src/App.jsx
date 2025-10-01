@@ -18,7 +18,7 @@ import StreakCalendar from "./components/streak/StreakCalendar.jsx";
 import Biorhythm from "./components/Biorhythm.jsx";
 import AddTask from "./components/dailyPlanner/AddTask.jsx";
 import Ask from "./components/Ask.jsx";
-import Footer from "./components/footer/footer.jsx";  
+import Footer from "./components/footer/Footer.jsx";  
 import CommunityPage from "./components/community/CommunityPage.jsx";
 
 const App = () => {

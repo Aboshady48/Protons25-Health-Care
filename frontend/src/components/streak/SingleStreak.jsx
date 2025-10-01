@@ -1,4 +1,3 @@
-// SingleStreak.jsx (no major changes, but included for completeness)
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../Style/StreaksPage.css";
@@ -34,22 +33,24 @@ export const SingleStreak = ({ date }) => {
     if (date) fetchLogs();
   }, [date]);
 
-  if (loading) return <p>Loading streak logs...</p>;
+  if (loading) return <p className="loading">Loading streak logs...</p>;
   if (error) return <p className="error">{error}</p>;
 
   return (
     <div className="single-streak">
-      <h2>Streak Logs for {date}</h2>
+      <h3>Streak Logs for {date}</h3>
       {logs.length > 0 ? (
-        <ul>
+        <ul className="log-list">
           {logs.map((log) => (
-            <li key={log.id}>
-              <strong>{log.title}</strong> - {log.description || "No description"} ✅
+            <li key={log.id} className="log-item">
+              <strong>{log.title}</strong>
+              <p>{log.description || "No description"}</p>
+              <span className="completed-check">✅ Completed</span>
             </li>
           ))}
         </ul>
       ) : (
-        <p>No completed tasks on this day.</p>
+        <p className="no-logs">No completed tasks on this day.</p>
       )}
     </div>
   );

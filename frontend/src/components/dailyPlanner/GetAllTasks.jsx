@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../Style/GetAllTasks.css";
+import AddTask from "./AddTask";
+
 
 const GetAllTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -71,6 +73,7 @@ const GetAllTasks = () => {
 
   return (
     <div className="GetAllTasks-container">
+      <AddTask />
       <h2>All Tasks</h2>
       <ul>
         {currentTasks.length > 0 ? (

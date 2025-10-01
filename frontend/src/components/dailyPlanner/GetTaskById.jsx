@@ -73,7 +73,7 @@ export const GetTaskById = () => {
     if (id) fetchData();
   }, [id]);
 
-  const handleBackClick = () => navigate("/");
+  const handleBackClick = () => navigate("/tasks");
   const handleEditClick = () => navigate(`/tasks/${id}/edit`);
   const handleRetry = () => window.location.reload();
   const handleDeleteClick = () => setShowDeleteModal(true);
@@ -94,7 +94,7 @@ export const GetTaskById = () => {
       });
 
       alert("Task deleted successfully!");
-      navigate("/");
+      navigate("/tasks");
     } catch (error) {
       console.error("Error deleting task:", error.response?.data || error);
       alert("Error deleting task. Please try again.");
