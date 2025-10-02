@@ -11,15 +11,14 @@ import { GetTaskById } from "./components/dailyPlanner/GetTaskById.jsx";
 import EditTask from "./components/dailyPlanner/EditTask.jsx";
 import { AboutUs } from "./components/AboutUs.jsx";
 import BlogPage from "./components/BlogPage.jsx";
-import { AddYourMood } from "./components/moodTracker/AddYourMood.jsx";
-import { ShowYourMoods } from "./components/moodTracker/ShowYourMoods.jsx";
 import StreaksPage from "./components/streak/StreaksPage.jsx";
 import StreakCalendar from "./components/streak/StreakCalendar.jsx";
-import Biorhythm from "./components/Biorhythm.jsx";
 import AddTask from "./components/dailyPlanner/AddTask.jsx";
 import Ask from "./components/Ask.jsx";
 import Footer from "./components/footer/Footer.jsx";  
 import CommunityPage from "./components/community/CommunityPage.jsx";
+import MoodTracker from "./components/MoodTracker/MoodTracker.jsx";
+import Biorhythm from "./components/Biorhythm/Biorhythm.jsx";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -53,9 +52,8 @@ const App = () => {
           <Route path="/tasks/:id/edit" element={<ProtectedRoute><EditTask /></ProtectedRoute>} />
           <Route path="/tasks/add" element={<ProtectedRoute><AddTask /></ProtectedRoute>} />
 
-          {/* Mood Tracker Routes */}
-          <Route path="/mood/add" element={<ProtectedRoute><AddYourMood /></ProtectedRoute>} />
-          <Route path="/mood/me" element={<ProtectedRoute><ShowYourMoods /></ProtectedRoute>} />
+          {/* Mood Tracker Route */}
+          <Route path="/mood" element={<ProtectedRoute><MoodTracker /></ProtectedRoute>} />
 
           {/* Streak Routes */}
           <Route path="/streak/calendar" element={<ProtectedRoute><StreakCalendar /></ProtectedRoute>} />
@@ -71,4 +69,3 @@ const App = () => {
 };
 
 export default App;
-

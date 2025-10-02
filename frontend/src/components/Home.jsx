@@ -21,7 +21,7 @@ export const Home = () => {
 
         <div
           className="home-card mood"
-          onClick={() => navigate("/mood/me")}
+          onClick={() => navigate("/mood")}
         >
           <Smile className="home-icon" />
           <span className="home-label">Mood Tracker</span>
