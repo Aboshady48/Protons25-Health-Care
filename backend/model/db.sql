@@ -21,20 +21,22 @@ CREATE TABLE tasks (
 );
 
 -- MOOD TRACKER TABLE
-CREATE TYPE mood_enum AS ENUM ('Happy', 'Sad', 'Anxious', 'Neutral', 'Excited', 'Stressed');
+
 CREATE TABLE mood_tracker (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     mood mood_enum, -- ENUM for consistency
-    intensity INT CHECK(intensity BETWEEN 1 AND 10),
-    task_id INT REFERENCES tasks(id) ON DELETE SET NULL, 
-    notes TEXT,
+    total_score INT CHECK(total_score BETWEEN 0 AND 30),
+    sleep_quality INT CHECK(sleep_quality BETWEEN 0 AND 3),
+    safety_level INT CHECK(safety_level BETWEEN 0 AND 3),
+    details TEXT,
+    safety_message TEXT,
     recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
 -- BIORHYTHM TABLE
-CREATE TYPE chronotype_enum AS ENUM ('Morning', 'Evening', 'Intermediate');
-CREATE TABLE biorhythm (
+\CREATE TABLE biorhythm (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     chronotype chronotype_enum,
@@ -61,29 +63,6 @@ CREATE TABLE chooses (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Trigger function to enforce admin_id references an admin user
-CREATE OR REPLACE FUNCTION enforce_admin_only()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM users WHERE id = NEW.admin_id AND role = 'admin') THEN
-        RAISE EXCEPTION 'admin_id must reference an admin user';
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
--- Trigger on chooses table
-CREATE TRIGGER admin_check
-BEFORE INSERT OR UPDATE ON chooses
-FOR EACH ROW
-EXECUTE FUNCTION enforce_admin_only();
-
--- Recommended Indexes for performance
-CREATE INDEX idx_tasks_user ON tasks(user_id);
-CREATE INDEX idx_mood_user ON mood_tracker(user_id);
-CREATE INDEX idx_bio_user ON biorhythm(user_id);
-CREATE INDEX idx_streaks_user_task ON streaks(user_id, task_id);
-CREATE INDEX idx_chooses_admin ON chooses(admin_id);
 
 -- STREAK LOGS (store each completed day)
 CREATE TABLE streak_logs (
