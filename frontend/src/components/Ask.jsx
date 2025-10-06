@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import "../Style/Ask.css";
 
-const API_URL = "http://localhost:5001/api/chat"; // backend endpoint
+const API_URL = "http://localhost:5001/api/chat"; 
 
 const Ask = () => {
   const [messages, setMessages] = useState([
