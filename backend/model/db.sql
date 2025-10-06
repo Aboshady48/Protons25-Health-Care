@@ -98,3 +98,11 @@ CREATE TABLE streak_logs (
 
 -- Index for faster lookups
 CREATE INDEX idx_streak_logs_user_date ON streak_logs(user_id, completed_date);
+
+CREATE TABLE community_feedback(
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    feedback TEXT NOT NULL,
+    rating INT CHECK(rating BETWEEN 1 AND 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)

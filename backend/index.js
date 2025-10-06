@@ -8,6 +8,7 @@ const taskRouter = require("./dailyPlanner/router/tasks.router");
 const MoodRouter = require("./moodTracker/router/moodAndEnergy.router");
 const cors = require("cors");
 const streakRouter = require("./streak/router/index");
+const communityRouter = require("./community/community.router");
 
 
 //cors
@@ -26,6 +27,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/tasks", taskRouter);
 app.use("/api/mood", MoodRouter);
 app.use("/api/streak",streakRouter);
+app.use("/api/community", communityRouter);
 
 
 
