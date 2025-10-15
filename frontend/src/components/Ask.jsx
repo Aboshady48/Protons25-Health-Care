@@ -1,77 +1,93 @@
-import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
-import "../Style/Ask.css";
+import React, { useState } from "react";
+impo
 
-const API_URL = "http://localhost:5001/api/chat"; 
-
-const Ask = () => {
-  const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hello! How can I help you today?" },
-  ]);
-  const [input, setInput] = useState("");
+export default function Ask() {
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
-  const chatEndRef = useRef(null);
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  const sendMessage = async (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
-    // Add user message to UI
-    const userMessage = { sender: "user", text: input };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
+  const handleAsk = async () => {
+    // Trim the question to ensure no whitespace-only strings are sent
+    const questionToSend = question.trim(); 
+    
+    if (!questionToSend) {
+      setAnswer("Please type a question before asking! 🧐");
+      return;
+    }
+    
     setLoading(true);
+    setAnswer(""); // Clear previous answer
 
     try {
-      const res = await axios.post(API_URL, { message: input });
-      const reply = res.data.reply || "Sorry, I didn’t get that.";
+      // 1. Send the request to the backend
+      const res = await fetch("http://localhost:5000/api/ai/ask", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Send the trimmed, verified question string
+        body: JSON.stringify({ prompt: questionToSend }),
+      });
 
-      setMessages((prev) => [...prev, { sender: "bot", text: reply }]);
+      // 2. Check for non-2xx status codes (like 400 or 500)
+      if (!res.ok) {
+        // Attempt to read the error message from the server response body
+        let errorDetails = `Server responded with status ${res.status}`;
+        try {
+            const errorData = await res.json();
+            errorDetails = errorData.error || errorDetails;
+        } catch (e) {
+            // Failed to parse JSON error response
+            console.error("Failed to parse error response from server:", e);
+        }
+        
+        throw new Error(errorDetails);
+      }
+      
+      // 3. Process success response
+      const data = await res.json();
+      
+      // Update the state with the received reply
+      setAnswer(data.reply || "No clear response from AI 😅");
+      
+      // Clear the input only if the API call was successful
+      setQuestion(""); 
+      
     } catch (err) {
-      console.error("Error:", err.response?.data || err.message);
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "⚠️ Error: Please try again later." },
-      ]);
+      console.error("Frontend Request Error:", err.message);
+      // Display a friendly error message
+      setAnswer(`Something went wrong ❌: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="chatbot-container">
-      <div className="chatbot-messages">
-        {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`chatbot-message ${
-              msg.sender === "user" ? "user" : "bot"
-            }`}
-          >
-            {msg.text}
-          </div>
-        ))}
-        <div ref={chatEndRef} />
+    <div className="ask-container">
+      <h1 className="ask-title">Ask Our AI Assistant 🤖</h1>
+      <div className="ask-box">
+        <textarea
+          className="ask-input"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          placeholder="Type your question here..."
+          rows={4}
+        />
+        <button 
+          className="ask-btn" 
+          onClick={handleAsk} 
+          disabled={loading}
+        >
+          {loading ? "Thinking..." : "Ask"}
+        </button>
       </div>
 
-      <form className="chatbot-input-area" onSubmit={sendMessage}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message..."
-          disabled={loading}
-        />
-        <button type="submit" disabled={loading || !input.trim()}>
-          {loading ? "..." : "Send"}
-        </button>
-      </form>
+      {answer && (
+        <div className="answer-box">
+          <h2>AI Response:</h2>
+          <p>{answer}</p>
+        </div>
+      )}
     </div>
   );
-};
-
-export default Ask;
+}
