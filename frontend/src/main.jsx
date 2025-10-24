@@ -1,12 +1,9 @@
-// main.jsx
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import "./Style/index.css";
 
-// Floating Particles (CSS only)
 function createFloatingParticles() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
@@ -34,7 +31,7 @@ function createFloatingParticles() {
   }
 }
 
-// Initialize
+
 const init = () => {
   createFloatingParticles();
 };

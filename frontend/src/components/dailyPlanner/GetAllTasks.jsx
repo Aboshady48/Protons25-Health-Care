@@ -1,4 +1,3 @@
-// components/dailyPlanner/GetAllTasks.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -34,12 +33,10 @@ const GetAllTasks = () => {
     }
   };
 
-  // Handle view task click
   const handleViewTaskClick = (taskId) => {
     navigate(`/tasks/${taskId}`);
   };
 
-  // Handle edit task click
   const handleEditTaskClick = (taskId) => {
     navigate(`/tasks/${taskId}/edit`);
   };
@@ -55,7 +52,6 @@ const GetAllTasks = () => {
   const currentTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
   const totalPages = Math.ceil(tasks.length / tasksPerPage);
 
-  // Map priority to color + label
   const getPriorityClass = (priority) => {
     switch (priority) {
       case 5:
@@ -93,7 +89,6 @@ const GetAllTasks = () => {
                   </p>
                 )}
 
-                {/* NEW: Priority + Completed badges */}
                 <div className="task-meta">
                   <span className={`priority-badge ${getPriorityClass(task.priority)}`}>
                     Priority {task.priority}
@@ -131,7 +126,6 @@ const GetAllTasks = () => {
         )}
       </ul>
 
-      {/* Pagination Controls */}
       <div className="pagination">
         <button
           className="pagination-btn left-btn"

@@ -35,15 +35,12 @@ export const DeleteTasks = () => {
     <div>
       <h2>Delete Task</h2>
 
-      {/* زرار يفتح المودال */}
       <button className="delete-btn" onClick={() => setShowModal(true)}>
         Delete Task
       </button>
 
-      {/* رسالة بعد العملية */}
       {message && <p>{message}</p>}
 
-      {/* المودال */}
       {showModal && (
         <div className="delete-modal-overlay">
           <div className="delete-modal">

@@ -1,64 +1,50 @@
-// --- REQUIRED IMPORTS ---
-const express = require('express');
-const router = express.Router();
-const { GoogleGenAI } = require('@google/genai');
+const express = require("express");
+const fetch = require("node-fetch");
+require("dotenv").config();
 
-// --- AI INITIALIZATION ---
+const router = express.Router();
 const apiKey = process.env.GEMINI_API_KEY;
 
-if (!apiKey) {
-    console.error("CRITICAL ERROR: GEMINI_API_KEY is not set in environment variables. Check .env file.");
-}
+router.post("/ask", async (req, res) => {
+  const { prompt } = req.body;
 
-const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
+  if (!prompt) {
+    return res.status(400).json({ error: "No prompt provided" });
+  }
 
-// --- AI ASK ROUTE ---
-router.post('/ask', async (req, res) => {
-    if (!ai) {
-        return res.status(503).json({ error: "AI service is currently unavailable. API Key missing." });
+  try {
+    console.log("🧠 Received Prompt:", prompt);
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("🔥 API Error:", data);
+      throw new Error(data.error?.message || "Unknown error from Google API");
     }
-    
-    const { prompt } = req.body;
 
-    console.log("--- START AI REQUEST ---");
-    console.log("Received prompt:", prompt); 
-    
-    if (!prompt || typeof prompt !== 'string' || prompt.trim().length === 0) {
-        console.error("400 Bad Request: Prompt is empty or not a string.");
-        return res.status(400).json({ error: "Prompt is required and cannot be empty." });
-    }
+    const reply =
+      data.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "No response generated";
+    console.log("✨ AI Response:", reply);
 
-    try {
-        // 3. Call the Gemini API
-        const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash-latest', 
-            contents: [{ parts: [{ text: prompt }] }],
-        });
-
-        // *** CRITICAL DEBUGGING LOG ***
-        // Log the entire raw response object structure from the API
-        console.log("Raw API Response:", response); 
-        // *******************************
-
-        // 4. Extract the text
-        const replyText = response.text;
-
-        // 5. Check for an empty reply
-        if (!replyText || replyText.trim() === '') {
-            console.warn("AI returned an empty or unreadable response.");
-            return res.json({ reply: "I'm sorry, I couldn't generate a clear response for that." });
-        }
-
-        // 6. Success: Send the reply
-        console.log("Successfully generated AI response.");
-        res.json({ reply: replyText });
-
-    } catch (error) {
-        console.error("FATAL AI GENERATION ERROR:", error.message || error); 
-        res.status(500).json({ error: "An internal server error occurred during AI generation." });
-    } finally {
-        console.log("--- END AI REQUEST ---");
-    }
+    res.json({ reply });
+  } catch (err) {
+    console.error("🔥 AI Generation Error (Full Details):", err);
+    res.status(500).json({
+      error: "An internal server error occurred during AI generation.",
+      details: err.message,
+    });
+  }
 });
 
 module.exports = router;

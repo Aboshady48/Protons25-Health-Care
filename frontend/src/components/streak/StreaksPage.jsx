@@ -65,7 +65,7 @@ const StreaksPage = () => {
       const response = await axios.get("http://localhost:5000/api/auth/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setCreatedAt(response.data.created_at.split("T")[0]); // YYYY-MM-DD
+      setCreatedAt(response.data.created_at.split("T")[0]);
     } catch (error) {
       console.error("Error fetching profile:", error.response?.data || error.message);
     }
@@ -87,7 +87,6 @@ const StreaksPage = () => {
 
   const markTaskCompleted = async (taskId) => {
     try {
-      // Update task completed status
       await axios.put(
         `http://localhost:5000/api/tasks/${taskId}`,
         { completed: true },
@@ -97,14 +96,12 @@ const StreaksPage = () => {
         prev.map((task) => (task.id === taskId ? { ...task, completed: true } : task))
       );
 
-      // Log the completion and update streak
       await axios.post(
         "http://localhost:5000/api/streak/complete",
         { taskId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
-      // Refresh streaks, completed days, and analytics
       await Promise.all([fetchStreaks(), fetchCompletedDays(), fetchAnalytics()]);
     } catch (error) {
       console.error("Error marking task completed:", error.response?.data || error.message);
@@ -134,13 +131,12 @@ const StreaksPage = () => {
     Promise.all([fetchStreaks(), fetchTasks(), fetchProfile(), fetchCompletedDays(), fetchAnalytics()]);
   }, []);
 
-  const today = new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD
+  const today = new Date().toLocaleDateString("en-CA"); 
 
   return (
     <div className="streaks-container">
       <h2 className="page-title">🔥 Your Streaks</h2>
 
-      {/* Analytics Section */}
       <div className="analytics-section">
         <h3>Streak Analytics</h3>
         {analyticsLoading ? (
@@ -167,7 +163,6 @@ const StreaksPage = () => {
         )}
       </div>
 
-      {/* Tasks Section */}
       {tasks.length > 0 ? (
         <div className="streaks-grid">
           {tasks.map((task) => {

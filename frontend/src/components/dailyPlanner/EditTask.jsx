@@ -1,4 +1,3 @@
-// components/dailyPlanner/EditTask.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -17,7 +16,6 @@ const EditTask = () => {
   const [error, setError] = useState(null);
   const [saving, setSaving] = useState(false);
 
-  // Fetch task data
   useEffect(() => {
     const fetchTask = async () => {
       try {
@@ -134,7 +132,6 @@ const EditTask = () => {
       </div>
 
       <form onSubmit={onSubmitForm} className="EditTask-form">
-        {/* Title */}
         <div className="form-group">
           <label htmlFor="title">Task Title *</label>
           <input
@@ -148,7 +145,6 @@ const EditTask = () => {
           />
         </div>
 
-        {/* Description */}
         <div className="form-group">
           <label htmlFor="description">Task Description</label>
           <textarea
@@ -161,7 +157,6 @@ const EditTask = () => {
           />
         </div>
 
-        {/* Priority */}
         <div className="form-group">
           <label htmlFor="priority">Priority</label>
           <select
@@ -178,7 +173,6 @@ const EditTask = () => {
           </select>
         </div>
 
-        {/* Completed */}
         <div className="form-group">
           <label className={`completed-label ${completed ? "done" : "pending"}`}>
             <input
@@ -190,7 +184,6 @@ const EditTask = () => {
           </label>
         </div>
 
-        {/* Actions */}
         <div className="form-actions">
           <button
             type="button"

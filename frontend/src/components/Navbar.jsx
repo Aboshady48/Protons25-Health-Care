@@ -11,7 +11,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
@@ -22,17 +21,14 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Recheck token whenever route changes
   useEffect(() => {
     setToken(localStorage.getItem("token"));
   }, [location.pathname]);
 
-  // Close sidebar when route changes
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  // Prevent body scroll when sidebar is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -60,14 +56,12 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  // Close sidebar when clicking overlay
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
       setIsOpen(false);
     }
   };
 
-  // Handle keyboard navigation
   const handleKeyDown = (e) => {
     if (e.key === 'Escape') {
       setIsOpen(false);
@@ -81,7 +75,6 @@ const Navbar = () => {
         <img src={eira_logo} alt="Eira Logo" className="logo" />
       </Link>
 
-      {/* Desktop Links */}
       <ul className="nav-links">
         {token ? (
           <>
@@ -175,7 +168,6 @@ const Navbar = () => {
         )}
       </ul>
 
-      {/* Mobile Menu Toggle - Animated Hamburger */}
       <button 
         className={`menu-toggle ${isOpen ? 'open' : ''}`}
         onClick={toggleSidebar}
@@ -189,7 +181,6 @@ const Navbar = () => {
         <span className="hamburger-line"></span>
       </button>
 
-      {/* Sidebar (Mobile) */}
       {isOpen && (
         <div 
           className="sidebar-overlay" 
@@ -200,7 +191,6 @@ const Navbar = () => {
           aria-labelledby="mobile-menu-title"
         >
           <ul className="sidebar" id="mobile-sidebar">
-            {/* Close Button */}
             <button 
               className="close-btn" 
               onClick={closeSidebar}
@@ -210,7 +200,6 @@ const Navbar = () => {
               ×
             </button>
 
-            {/* Hidden title for screen readers */}
             <h2 id="mobile-menu-title" className="sr-only">Navigation Menu</h2>
 
             {token ? (
@@ -314,7 +303,6 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Screen reader only class for accessibility */}
       <style jsx>{`
         .sr-only {
           position: absolute;

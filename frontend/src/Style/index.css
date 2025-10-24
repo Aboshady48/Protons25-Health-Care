@@ -1,16 +1,12 @@
-/* index.css */
-
-/* Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
-/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Base styles */
+
 html,
 body {
   width: 100%;
@@ -23,7 +19,7 @@ body {
   position: relative;
 }
 
-/* Animated background */
+
 body::before {
   content: '';
   position: fixed;
@@ -54,7 +50,7 @@ body::after {
   to { opacity: 0.12; }
 }
 
-/* ================= Links & Buttons ================= */
+
 a,
 button {
   position: relative;
@@ -93,7 +89,7 @@ button:hover::before {
   transform: translateX(100%);
 }
 
-/* ================= Cards ================= */
+
 .card {
   background: rgba(147, 218, 151, 0.04);
   border: 1px solid rgba(147, 218, 151, 0.1);
@@ -106,7 +102,7 @@ button:hover::before {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* ================= Inputs ================= */
+
 input,
 textarea,
 select {
@@ -132,7 +128,7 @@ textarea::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* ================= Floating Particles ================= */
+
 .particles-container {
   position: fixed;
   top: 0;
@@ -155,7 +151,7 @@ textarea::placeholder {
   100% { transform: translateY(0); }
 }
 
-/* ================= Selection + Scrollbar ================= */
+
 ::selection {
   background: rgba(147, 218, 151, 0.2);
   color: #ffffff;
@@ -174,7 +170,7 @@ textarea::placeholder {
   background: rgba(147, 218, 151, 0.5);
 }
 
-/* ================= Reduced Motion ================= */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

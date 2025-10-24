@@ -1,4 +1,3 @@
-/* Ultra-Modern Responsive Navbar */
 .navbar {
   background: rgba(62, 95, 68, 0.85);
   backdrop-filter: blur(25px);
@@ -15,14 +14,13 @@
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Scrolled state */
 .navbar.scrolled {
   background: rgba(62, 95, 68, 0.95);
   padding: 0.6rem 3rem;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Logo with modern animations */
+
 .logo {
   height: 52px;
   border-radius: 16px;
@@ -53,7 +51,7 @@
   filter: brightness(1.1);
 }
 
-/* Desktop Navigation - Floating glass effect */
+
 .nav-links {
   list-style: none;
   display: flex;
@@ -71,7 +69,7 @@
   position: relative;
 }
 
-/* Modern link styling with magnetic effect */
+
 .nav-link {
   display: flex;
   align-items: center;
@@ -88,7 +86,7 @@
   white-space: nowrap;
 }
 
-/* Magnetic hover effect */
+
 .nav-link::before {
   content: '';
   position: absolute;
@@ -114,7 +112,7 @@
   text-shadow: 0 2px 8px rgba(147, 218, 151, 0.3);
 }
 
-/* Active state with animated border */
+
 .nav-link[aria-current="page"] {
   color: #ffffff;
   background: linear-gradient(135deg, rgba(147, 218, 151, 0.25), rgba(147, 218, 151, 0.15));
@@ -140,7 +138,7 @@
   to { opacity: 1; }
 }
 
-/* Modern logout button with gradient */
+
 .nav-logout-btn {
   display: inline-flex;
   align-items: center;
@@ -183,7 +181,6 @@
   box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
 }
 
-/* Animated hamburger menu */
 .menu-toggle {
   display: none;
   width: 44px;
@@ -205,7 +202,7 @@
   transform: scale(1.05);
 }
 
-/* Hamburger lines */
+
 .hamburger-line {
   width: 20px;
   height: 2px;
@@ -227,7 +224,7 @@
   top: 28px;
 }
 
-/* Animated X when menu is open */
+
 .menu-toggle.open .hamburger-line:nth-child(1) {
   transform: rotate(45deg);
   top: 20px;
@@ -243,7 +240,7 @@
   top: 20px;
 }
 
-/* Enhanced sidebar overlay */
+
 .sidebar-overlay {
   position: fixed;
   top: 0;
@@ -269,7 +266,7 @@
   }
 }
 
-/* Modern sliding sidebar */
+
 .sidebar {
   position: relative;
   width: 340px;
@@ -298,7 +295,7 @@
   }
 }
 
-/* Custom scrollbar */
+
 .sidebar::-webkit-scrollbar {
   width: 6px;
 }
@@ -317,7 +314,7 @@
   background: linear-gradient(180deg, rgba(147, 218, 151, 0.8), rgba(147, 218, 151, 0.6));
 }
 
-/* Modern close button */
+
 .close-btn {
   position: absolute;
   top: 2rem;
@@ -344,7 +341,7 @@
   box-shadow: 0 6px 20px rgba(239, 68, 68, 0.2);
 }
 
-/* Sidebar navigation links */
+
 .sidebar li {
   margin-bottom: 0.8rem;
   transform: translateX(30px);
@@ -406,7 +403,7 @@
   text-shadow: 0 2px 8px rgba(147, 218, 151, 0.3);
 }
 
-/* Modern sidebar logout button */
+
 .sidebar-logout-btn {
   display: inline-flex;
   align-items: center;
@@ -457,7 +454,7 @@
   transform: rotate(5deg);
 }
 
-/* Responsive breakpoints */
+
 @media (max-width: 1024px) {
   .navbar {
     padding: 0.8rem 2rem;
@@ -540,7 +537,6 @@
   }
 }
 
-/* Focus states for accessibility */
 .nav-link:focus,
 .nav-logout-btn:focus,
 .sidebar-link:focus,
@@ -552,7 +548,7 @@
   box-shadow: 0 0 0 6px rgba(147, 218, 151, 0.1);
 }
 
-/* Reduced motion support */
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

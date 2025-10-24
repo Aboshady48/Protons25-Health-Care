@@ -11,7 +11,6 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const token = propToken || localStorage.getItem("token");
 
-  // Fetch profile to get account creation date (only if not provided)
   const fetchProfile = async () => {
     if (propCreatedAt) return;
     try {
@@ -19,21 +18,20 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data?.created_at) {
-        setCreatedAt(response.data.created_at.split("T")[0]); // YYYY-MM-DD
+        setCreatedAt(response.data.created_at.split("T")[0]); 
       }
     } catch (error) {
       console.error("Error fetching profile:", error.response?.data || error.message);
     }
   };
 
-  // Fetch completed days only if not provided as prop
   const fetchCompletedDays = async () => {
     if (propCompletedDates) return;
     try {
       const response = await axios.get("http://localhost:5000/api/streak/completed-days", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const dates = response.data.map((d) => new Date(d).toLocaleDateString("en-CA")); // YYYY-MM-DD
+      const dates = response.data.map((d) => new Date(d).toLocaleDateString("en-CA")); 
       setCompletedDates(dates);
     } catch (error) {
       console.error("Error fetching completed days:", error.response?.data || error.message);
@@ -45,17 +43,14 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
     fetchProfile();
   }, []);
 
-  // Generate calendar for the selected month and year
   const generateCalendar = () => {
     const firstDay = new Date(currentYear, currentMonth, 1).getDay();
     const lastDate = new Date(currentYear, currentMonth + 1, 0).getDate();
     const calendarDays = [];
 
-    // Add empty slots for days before the first day of the month
     for (let i = 0; i < firstDay; i++) {
       calendarDays.push(null);
     }
-    // Add days of the month
     for (let day = 1; day <= lastDate; day++) {
       calendarDays.push(new Date(currentYear, currentMonth, day));
     }
@@ -64,7 +59,6 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
 
   const calendarDays = generateCalendar();
 
-  // Handle month/year navigation
   const handlePrevMonth = () => {
     setCurrentMonth((prev) => {
       if (prev === 0) {
@@ -85,7 +79,6 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
     });
   };
 
-  // Restrict navigation to months after account creation
   const isPrevMonthDisabled = () => {
     if (!createdAt) return true;
     const creationDate = new Date(createdAt);
@@ -100,7 +93,6 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
     }
   };
 
-  // Get month name for display
   const getMonthName = () => {
     return new Date(currentYear, currentMonth).toLocaleString("default", { month: "long" });
   };
@@ -109,7 +101,6 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
     <div className="streaks-container">
       <h2>Your Streak Calendar</h2>
 
-      {/* Navigation */}
       <div className="calendar-navigation">
         <button onClick={handlePrevMonth} disabled={isPrevMonthDisabled()}>
           Previous
@@ -120,7 +111,6 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
         <button onClick={handleNextMonth}>Next</button>
       </div>
 
-      {/* Legend */}
       <div className="streaks-grid">
         <div className="streak-item completed-card">
           <h3>Completed</h3>
@@ -136,7 +126,6 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
         </div>
       </div>
 
-      {/* Calendar */}
       <div className="calendar-grid">
         {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
           <div key={d} className="calendar-day header">
@@ -172,7 +161,6 @@ const StreakCalendar = ({ completedDates: propCompletedDates, createdAt: propCre
         })}
       </div>
 
-      {/* Show streak details */}
       {selectedDay && (
         <div className="day-logs">
           <button onClick={() => setSelectedDay(null)} className="close-button">

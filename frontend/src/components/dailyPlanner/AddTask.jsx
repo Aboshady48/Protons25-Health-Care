@@ -5,8 +5,8 @@ import '../../Style/AddTask.css'
 const AddTask = () => {
   const [description, setDescription] = useState("");
   const [title, setTitle] = useState("");
-  const [priority, setPriority] = useState(1); // default priority = 1
-  const [completed, setCompleted] = useState(false); // default not completed
+  const [priority, setPriority] = useState(1); 
+  const [completed, setCompleted] = useState(false); 
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -17,7 +17,6 @@ const AddTask = () => {
         return;
       }
 
-      // Wrap single task in an array (backend expects array)
       const body = [
         {
           title,
@@ -41,7 +40,6 @@ const AddTask = () => {
       console.log("Task added:", response.data);
       alert("✅ Task added successfully!");
       
-      // Reset form
       setDescription("");
       setTitle("");
       setPriority(1);
@@ -61,7 +59,6 @@ const AddTask = () => {
       </h1>
 
       <form className="AddTask-form" onSubmit={onSubmitForm}>
-        {/* Title input */}
         <input
           type="text"
           placeholder="Enter title"
@@ -71,7 +68,6 @@ const AddTask = () => {
           required
         />
 
-        {/* Description input */}
         <input
           type="text"
           placeholder="Add Your Task Description"
@@ -88,7 +84,6 @@ const AddTask = () => {
           }}
         />
 
-        {/* Priority select */}
         <select
           className="AddText-input"
           value={priority}
@@ -106,7 +101,6 @@ const AddTask = () => {
           <option value={5}>Priority 5 (Highest)</option>
         </select>
 
-        {/* Completed checkbox */}
         <label className="AddTask-checkbox">
           <input
             type="checkbox"
@@ -116,7 +110,6 @@ const AddTask = () => {
           Mark as Completed
         </label>
 
-        {/* Submit button */}
         <button type="submit" className="AddTask-button">
           Add Task
         </button>

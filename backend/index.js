@@ -8,7 +8,7 @@ const authRouter = require("./auth/router/auth.router");
 const taskRouter = require("./dailyPlanner/router/tasks.router");
 const MoodRouter = require("./moodTracker/router/moodAndEnergy.router");
 const streakRouter = require("./streak/router/index");
-const aiRouter = require("./ai/router/ai.router"); 
+const aiRouter = require("./ai/router/ai.router.js"); 
 
 
 app.use(cors({

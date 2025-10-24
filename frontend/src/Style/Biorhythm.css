@@ -15,7 +15,7 @@
 }
 
 .biorhythm-container:hover {
-  transform: translateY(-4px); /* floating effect */
+  transform: translateY(-4px); 
 }
 
 .biorhythm-container h2 {

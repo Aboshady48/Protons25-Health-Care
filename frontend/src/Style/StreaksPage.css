@@ -2,7 +2,7 @@
   max-width: 1200px;
   margin: 80px auto;
   padding: 28px;
-  background: rgba(62, 95, 68, 0.9); /* Green-themed background */
+  background: rgba(62, 95, 68, 0.9); 
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   text-align: center;
@@ -18,12 +18,12 @@
 
 .page-title {
   font-size: 2rem;
-  color: #93da97; /* Accent green */
+  color: #93da97; 
   text-align: center;
   margin-bottom: 24px;
 }
 
-/* Analytics Section */
+
 .analytics-section {
   margin-bottom: 30px;
   padding: 20px;
@@ -70,7 +70,7 @@
   font-weight: bold;
 }
 
-/* Streaks Grid */
+
 .streaks-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -107,7 +107,7 @@
   color: #93da97;
 }
 
-/* Buttons */
+
 .complete-btn,
 .reset-btn {
   margin: 8px 8px 0 0;
@@ -153,7 +153,7 @@
   transform: translateY(-2px);
 }
 
-/* Calendar Navigation */
+
 .calendar-navigation {
   display: flex;
   justify-content: space-between;
@@ -193,7 +193,7 @@
   text-align: center;
 }
 
-/* Calendar Grid */
+
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -249,7 +249,7 @@
   filter: brightness(1.15);
 }
 
-/* Legend */
+
 .legend {
   display: flex;
   justify-content: center;
@@ -285,7 +285,7 @@
   background: #9ca3af;
 }
 
-/* Legend Cards */
+
 .streaks-grid .completed-card,
 .streaks-grid .active-card,
 .streaks-grid .inactive-card {
@@ -310,7 +310,7 @@
   color: #fff;
 }
 
-/* Single Streak */
+
 .single-streak {
   margin-top: 20px;
   padding: 20px;
@@ -376,7 +376,7 @@
   transform: translateY(-2px);
 }
 
-/* Responsive Design */
+
 @media (max-width: 1024px) {
   .streaks-container {
     max-width: 800px;
