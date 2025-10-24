@@ -14,6 +14,7 @@ router.post("/ask", async (req, res) => {
 
   try {
     console.log("🧠 Received Prompt:", prompt);
+
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
       {
@@ -35,8 +36,8 @@ router.post("/ask", async (req, res) => {
     const reply =
       data.candidates?.[0]?.content?.parts?.[0]?.text ||
       "No response generated";
-    console.log("✨ AI Response:", reply);
 
+    console.log("✨ AI Response:", reply);
     res.json({ reply });
   } catch (err) {
     console.error("🔥 AI Generation Error (Full Details):", err);
