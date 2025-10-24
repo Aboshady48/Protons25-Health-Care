@@ -90,6 +90,6 @@
 .AddTask-checkbox input {
   width: 18px;
   height: 18px;
-  accent-color: #93da97; /* modern browsers */
+  accent-color: #93da97; 
   cursor: pointer;
 }

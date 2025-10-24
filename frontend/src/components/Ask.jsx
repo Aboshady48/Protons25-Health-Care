@@ -1,77 +1,78 @@
-import React, { useState, useRef, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import "../Style/Ask.css";
 
-const API_URL = "http://localhost:5001/api/chat"; // backend endpoint
-
-const Ask = () => {
-  const [messages, setMessages] = useState([
-    { sender: "bot", text: "Hello! How can I help you today?" },
-  ]);
-  const [input, setInput] = useState("");
+export default function Ask() {
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
   const [loading, setLoading] = useState(false);
-  const chatEndRef = useRef(null);
 
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  const handleAsk = async () => {
+    const prompt = question.trim();
 
-  const sendMessage = async (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+    if (!prompt) {
+      setAnswer("⚠️ Please type a question before asking!");
+      return;
+    }
 
-    // Add user message to UI
-    const userMessage = { sender: "user", text: input };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
     setLoading(true);
+    setAnswer("");
 
     try {
-      const res = await axios.post(API_URL, { message: input });
-      const reply = res.data.reply || "Sorry, I didn’t get that.";
+      const res = await fetch("http://localhost:5000/api/ai/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt }),
+      });
 
-      setMessages((prev) => [...prev, { sender: "bot", text: reply }]);
+      if (!res.ok) {
+        let errorMsg = `Server error (${res.status})`;
+        try {
+          const errData = await res.json();
+          errorMsg = errData.error || errorMsg;
+        } catch {}
+        throw new Error(errorMsg);
+      }
+
+      const data = await res.json();
+      setAnswer(data.reply || "🤔 The AI didn’t return a clear answer.");
+      setQuestion("");
     } catch (err) {
-      console.error("Error:", err.response?.data || err.message);
-      setMessages((prev) => [
-        ...prev,
-        { sender: "bot", text: "⚠️ Error: Please try again later." },
-      ]);
+      console.error("Frontend Request Error:", err.message);
+      setAnswer(`❌ Something went wrong: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="chatbot-container">
-      <div className="chatbot-messages">
-        {messages.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`chatbot-message ${
-              msg.sender === "user" ? "user" : "bot"
-            }`}
-          >
-            {msg.text}
-          </div>
-        ))}
-        <div ref={chatEndRef} />
-      </div>
+    <div className="ask-container">
+      <h1 className="ask-title">Ask Our AI Assistant 🤖</h1>
 
-      <form className="chatbot-input-area" onSubmit={sendMessage}>
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your message..."
+      <div className="ask-box">
+        <textarea
+          className="ask-input"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          placeholder="Type your question here..."
+          rows={4}
           disabled={loading}
         />
-        <button type="submit" disabled={loading || !input.trim()}>
-          {loading ? "..." : "Send"}
+        <button
+          className={`ask-btn ${loading ? "disabled" : ""}`}
+          onClick={handleAsk}
+          disabled={loading}
+        >
+          {loading ? "Thinking..." : "Ask"}
         </button>
-      </form>
+      </div>
+
+      {answer && (
+        <div className="answer-box">
+          <h2>💬 AI Response:</h2>
+          <p>{answer}</p>
+        </div>
+      )}
     </div>
   );
-};
+}
 
-export default Ask;

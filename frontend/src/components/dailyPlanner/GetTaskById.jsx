@@ -1,4 +1,3 @@
-// components/dailyPlanner/GetTaskById.jsx
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -13,7 +12,6 @@ export const GetTaskById = () => {
   const [deleting, setDeleting] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  // Map priority numbers to readable labels + CSS classes
   const getPriorityLabel = (priority) => {
     const map = {
       1: "Very Low",
@@ -151,7 +149,6 @@ export const GetTaskById = () => {
 
   return (
     <div className="GetTaskById-container">
-      {/* Delete Confirmation Modal */}
       {showDeleteModal && (
         <div className="delete-modal-overlay">
           <div className="delete-modal">
@@ -201,7 +198,6 @@ export const GetTaskById = () => {
           </>
         )}
 
-        {/* ✅ Completed Field */}
         {"completed" in task && (
           <div className="task-completed">
             <strong>Completed:</strong>
@@ -213,7 +209,6 @@ export const GetTaskById = () => {
           </div>
         )}
 
-        {/* ✅ Status */}
         {task.status && (
           <div className="task-status">
             <strong>Status:</strong>
@@ -223,7 +218,6 @@ export const GetTaskById = () => {
           </div>
         )}
 
-        {/* ✅ Priority (mapped) */}
         {task.priority && (
           <div className="task-priority">
             <strong>Priority:</strong>

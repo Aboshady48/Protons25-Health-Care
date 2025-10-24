@@ -23,7 +23,7 @@ const Login = () => {
 
       if (response.data.token) {
         localStorage.setItem("token", response.data.token);
-        navigate("/"); // redirect after login
+        navigate("/"); 
       }
     } catch (err) {
       console.error("Login failed:", err.response?.data || err.message);

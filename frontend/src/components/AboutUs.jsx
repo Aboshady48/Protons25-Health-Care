@@ -3,7 +3,6 @@ import "../Style/AboutUs.css"
 export const AboutUs = () => {
     return (
         <div className="about-us-page">
-            {/* Hero Section */}
             <section className="hero-section">
                 <div className="hero-content">
                     <div className="hero-text">
