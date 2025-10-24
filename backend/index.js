@@ -8,7 +8,9 @@ const authRouter = require("./auth/router/auth.router");
 const taskRouter = require("./dailyPlanner/router/tasks.router");
 const MoodRouter = require("./moodTracker/router/moodAndEnergy.router");
 const streakRouter = require("./streak/router/index");
-const aiRouter = require("./ai/router/ai.router.js"); 
+const communityRouter = require("./community/community.router");
+const questionRouter = require("./questions/router/questions.router");
+const bioRouter = require("./biorhythm/router/biorhythm.router");
 
 
 app.use(cors({
@@ -21,8 +23,12 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/tasks", taskRouter);
 app.use("/api/mood", MoodRouter);
-app.use("/api/streak", streakRouter);
-app.use("/api/ai", aiRouter); 
+app.use("/api/streak",streakRouter);
+app.use("/api/community", communityRouter);
+app.use("/api/questions", questionRouter);
+app.use("/api/biorhythm", bioRouter);
+
+
 
 app.listen(PORT, () => {
   console.log(`✅ Server is running on: http://localhost:${PORT}`);
