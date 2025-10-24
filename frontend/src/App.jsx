@@ -17,8 +17,9 @@ import AddTask from "./components/dailyPlanner/AddTask.jsx";
 import Ask from "./components/Ask.jsx";
 import Footer from "./components/footer/Footer.jsx";  
 import CommunityPage from "./components/community/CommunityPage.jsx";
-import MoodTracker from "./components/MoodTracker/MoodTracker.jsx";
-import Biorhythm from "./components/Biorhythm/Biorhythm.jsx";
+import MoodTracker from "./components/Tracker/MoodTracker.jsx";
+import Biorhythm from "./components/Tracker/Biorhythm.jsx";
+import IntegratedAssessment from "./components/IntegratedAssessment.jsx";
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -58,6 +59,9 @@ const App = () => {
           {/* Streak Routes */}
           <Route path="/streak/calendar" element={<ProtectedRoute><StreakCalendar /></ProtectedRoute>} />
           <Route path="/biorhythm" element={<ProtectedRoute><Biorhythm /></ProtectedRoute>} />
+
+          {/* Integrated Assessment Route */}
+          <Route path="/assessment" element={<ProtectedRoute><IntegratedAssessment /></ProtectedRoute>} />
 
           {/* Catch-all route */}
           <Route path="*" element={<Navigate to={token ? "/" : "/login"} />} />

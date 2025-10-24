@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../../Style/AddTask.css'
+import "../../Style/AddTask.css";
 
-const AddTask = () => {
-  const [description, setDescription] = useState("");
-  const [title, setTitle] = useState("");
-  const [priority, setPriority] = useState(1); // default priority = 1
-  const [completed, setCompleted] = useState(false); // default not completed
+const AddTask = ({ initialData, smartSuggestions, assessment }) => {
+  const [description, setDescription] = useState(initialData?.description || "");
+  const [title, setTitle] = useState(initialData?.title || "");
+  const [priority, setPriority] = useState(initialData?.priority || 1);
+  const [completed, setCompleted] = useState(initialData?.completed || false);
+
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title || "");
+      setDescription(initialData.description || "");
+      setPriority(initialData.priority || 1);
+      setCompleted(initialData.completed || false);
+    }
+  }, [initialData]);
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -17,13 +26,13 @@ const AddTask = () => {
         return;
       }
 
-      // Wrap single task in an array (backend expects array)
       const body = [
         {
           title,
           description,
           priority,
           completed,
+          ...(assessment && { metadata: { assessment } }) // Add assessment metadata
         },
       ];
 
@@ -41,12 +50,10 @@ const AddTask = () => {
       console.log("Task added:", response.data);
       alert("✅ Task added successfully!");
       
-      // Reset form
       setDescription("");
       setTitle("");
       setPriority(1);
       setCompleted(false);
-
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
       alert(error.response?.data?.message || "Failed to add task");
@@ -60,8 +67,25 @@ const AddTask = () => {
         <span>Add Task</span>
       </h1>
 
+      {smartSuggestions?.length > 0 && (
+        <div className="smart-suggestions">
+          <p>Suggested tasks based on your assessment:</p>
+          {smartSuggestions.map((suggestion, i) => (
+            <button
+              key={i}
+              className="suggestion-btn"
+              onClick={() => {
+                setTitle(`Smart: ${suggestion}`);
+                setDescription(`Generated for your current wellness state (${assessment?.energyLevel} energy)`);
+              }}
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
+      )}
+
       <form className="AddTask-form" onSubmit={onSubmitForm}>
-        {/* Title input */}
         <input
           type="text"
           placeholder="Enter title"
@@ -71,7 +95,6 @@ const AddTask = () => {
           required
         />
 
-        {/* Description input */}
         <input
           type="text"
           placeholder="Add Your Task Description"
@@ -88,7 +111,6 @@ const AddTask = () => {
           }}
         />
 
-        {/* Priority select */}
         <select
           className="AddText-input"
           value={priority}
@@ -106,7 +128,6 @@ const AddTask = () => {
           <option value={5}>Priority 5 (Highest)</option>
         </select>
 
-        {/* Completed checkbox */}
         <label className="AddTask-checkbox">
           <input
             type="checkbox"
@@ -116,7 +137,6 @@ const AddTask = () => {
           Mark as Completed
         </label>
 
-        {/* Submit button */}
         <button type="submit" className="AddTask-button">
           Add Task
         </button>

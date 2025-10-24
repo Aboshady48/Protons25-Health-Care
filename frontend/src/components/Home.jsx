@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { CalendarCheck2, Smile, HeartPulse } from "lucide-react"; 
+import { CalendarCheck2, Smile, HeartPulse, Zap } from "lucide-react"; 
 import "../Style/Home.css";
 
 export const Home = () => {
@@ -34,6 +34,8 @@ export const Home = () => {
           <HeartPulse className="home-icon" />
           <span className="home-label">Biorhythm</span>
         </div>
+
+    
 
       </div>
     </div>

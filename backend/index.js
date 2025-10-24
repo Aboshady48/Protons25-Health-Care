@@ -9,6 +9,8 @@ const MoodRouter = require("./moodTracker/router/moodAndEnergy.router");
 const cors = require("cors");
 const streakRouter = require("./streak/router/index");
 const communityRouter = require("./community/community.router");
+const questionRouter = require("./questions/router/questions.router");
+const bioRouter = require("./biorhythm/router/biorhythm.router");
 
 
 //cors
@@ -28,6 +30,8 @@ app.use("/api/tasks", taskRouter);
 app.use("/api/mood", MoodRouter);
 app.use("/api/streak",streakRouter);
 app.use("/api/community", communityRouter);
+app.use("/api/questions", questionRouter);
+app.use("/api/biorhythm", bioRouter);
 
 
 
