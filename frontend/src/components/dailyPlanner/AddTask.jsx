@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../../Style/AddTask.css'
+import "../../Style/AddTask.css";
 
-const AddTask = () => {
-  const [description, setDescription] = useState("");
-  const [title, setTitle] = useState("");
-  const [priority, setPriority] = useState(1); 
-  const [completed, setCompleted] = useState(false); 
+const AddTask = ({ initialData, smartSuggestions, assessment }) => {
+  const [description, setDescription] = useState(initialData?.description || "");
+  const [title, setTitle] = useState(initialData?.title || "");
+  const [priority, setPriority] = useState(initialData?.priority || 1);
+  const [completed, setCompleted] = useState(initialData?.completed || false);
+
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title || "");
+      setDescription(initialData.description || "");
+      setPriority(initialData.priority || 1);
+      setCompleted(initialData.completed || false);
+    }
+  }, [initialData]);
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
@@ -23,6 +32,7 @@ const AddTask = () => {
           description,
           priority,
           completed,
+          ...(assessment && { metadata: { assessment } }) // Add assessment metadata
         },
       ];
 
@@ -44,7 +54,6 @@ const AddTask = () => {
       setTitle("");
       setPriority(1);
       setCompleted(false);
-
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
       alert(error.response?.data?.message || "Failed to add task");
@@ -57,6 +66,24 @@ const AddTask = () => {
         Daily Planner
         <span>Add Task</span>
       </h1>
+
+      {smartSuggestions?.length > 0 && (
+        <div className="smart-suggestions">
+          <p>Suggested tasks based on your assessment:</p>
+          {smartSuggestions.map((suggestion, i) => (
+            <button
+              key={i}
+              className="suggestion-btn"
+              onClick={() => {
+                setTitle(`Smart: ${suggestion}`);
+                setDescription(`Generated for your current wellness state (${assessment?.energyLevel} energy)`);
+              }}
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
+      )}
 
       <form className="AddTask-form" onSubmit={onSubmitForm}>
         <input
