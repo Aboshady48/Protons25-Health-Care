@@ -1,7 +1,7 @@
 .ask-container {
   max-width: 700px;
   margin: 3rem auto;
-  background: #ffffff;
+  background: #3e5f44;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   padding: 2rem;
@@ -10,7 +10,7 @@
 }
 
 .ask-title {
-  color: #374151;
+  color: #fff;
   font-size: 1.8rem;
   margin-bottom: 1rem;
 }
@@ -23,7 +23,7 @@
 
 .ask-input {
   resize: none;
-  border: 1px solid #d1d5db;
+  border: 1px solid #fff;
   border-radius: 12px;
   padding: 1rem;
   font-size: 1rem;
@@ -38,7 +38,7 @@
 }
 
 .ask-btn {
-  background: #2563eb;
+  background: #476d4e;
   color: #fff;
   border: none;
   padding: 0.8rem 1.2rem;
@@ -49,7 +49,7 @@
 }
 
 .ask-btn:hover {
-  background: #1e40af;
+  background: #53805b;
 }
 
 .ask-btn.disabled {
@@ -59,20 +59,20 @@
 
 .answer-box {
   margin-top: 2rem;
-  background: #f9fafb;
+  background: #3e5f44;
   border-radius: 12px;
   padding: 1rem 1.5rem;
   text-align: left;
 }
 
 .answer-box h2 {
-  color: #1f2937;
+  color: #fff;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 
 .answer-box p {
-  color: #374151;
+  color: #fff;
   white-space: pre-line;
 }
 
