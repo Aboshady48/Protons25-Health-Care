@@ -141,10 +141,19 @@ INSERT INTO biorhythm_profiles (profile_key, profile_name, description, best_foc
 ('ShortSleeper', 'Short-Sleeper Type (High Energy, Less Sleep)', 'High energy with less sleep requirement', 'Sharp bursts of focus throughout the day', 'Short, intense workouts (any time)', 'Small meals/snacks keep energy stable', 'Use your bursts wisely — do big tasks in short focus windows.'),
 ('SlowStarter', 'Slow-Starter Type (Late Energizer)', 'Energy builds slowly throughout the day', 'Starts low in the morning, energy builds slowly', 'Midday or afternoon works best', 'Light breakfast, bigger lunch', 'Don''t pressure yourself early. Schedule important tasks later in the day.');
 
---profile
-CREATE table profile(
-    profile_img IMAGE ,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    bio TEXT,
-    PRIMARY KEY (user_id)
+-- AI CHATS TABLE
+CREATE TABLE chats (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  title VARCHAR(255),
+  model_name VARCHAR(100),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE messages (
+  id SERIAL PRIMARY KEY,
+  chat_id INTEGER REFERENCES chats(id) ON DELETE CASCADE,
+  sender VARCHAR(10) CHECK (sender IN ('user', 'ai')),
+  content TEXT,
+  created_at TIMESTAMP DEFAULT NOW()
 );
