@@ -195,12 +195,109 @@ button.ask-send-icon:disabled {
 
 /* Animation */
 @keyframes ask-pulse {
-  0%, 100% { 
-    opacity: 0.4; 
-    transform: scale(0.9); 
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.9);
   }
-  50% { 
-    opacity: 1; 
-    transform: scale(1.1); 
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
   }
+}
+
+/* New Styles for Sidebar and Layout */
+.ask-main-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.ask-sidebar {
+  width: 250px;
+  border-right: 1px solid #3e5f44;
+  padding: 1rem;
+  overflow-y: auto;
+  background: #2d4532;
+}
+
+.ask-chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ask-empty-chat {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a0b5a4;
+  font-size: 1.2rem;
+}
+
+.ask-new-chat-button {
+  background: #3e5f44;
+  border: 1px solid #476d4e;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.ask-new-chat-button:hover {
+  background: #476d4e;
+}
+
+.ask-chat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ask-chat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.ask-chat-item:hover {
+  background: #3e5f44;
+}
+
+.ask-chat-item-selected {
+  background: #476d4e;
+}
+
+.ask-chat-item-title {
+  color: #fff;
+  font-weight: 500;
+  flex: 1;
+}
+
+.ask-chat-item-date {
+  color: #a0b5a4;
+  font-size: 0.8rem;
+  margin-right: 1rem;
+}
+
+.ask-delete-button {
+  background: transparent;
+  border: none;
+  color: #a0b5a4;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+.ask-delete-button:hover {
+  color: #fff;
 }
