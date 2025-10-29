@@ -14,12 +14,12 @@ import BlogPage from "./components/BlogPage.jsx";
 import StreaksPage from "./components/streak/StreaksPage.jsx";
 import StreakCalendar from "./components/streak/StreakCalendar.jsx";
 import AddTask from "./components/dailyPlanner/AddTask.jsx";
-import Ask from "./components/Ask.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import CommunityPage from "./components/community/CommunityPage.jsx";
 import MoodTracker from "./components/Tracker/MoodTracker.jsx";
 import Biorhythm from "./components/Tracker/Biorhythm.jsx";
 import IntegratedAssessment from "./components/IntegratedAssessment.jsx";
+import ChatWrapper from "./components/Ai/components/ChatWrapper.jsx";   
 
 const App = () => {
   const token = localStorage.getItem("token");
@@ -44,7 +44,6 @@ const App = () => {
           <Route path="/community" element={<ProtectedRoute><CommunityPage /></ProtectedRoute>} />
           <Route path="/streak" element={<ProtectedRoute><StreaksPage /></ProtectedRoute>} />
           <Route path="/blog" element={<ProtectedRoute><BlogPage /></ProtectedRoute>} />
-          <Route path="/ask" element={<ProtectedRoute><Ask /></ProtectedRoute>} />
           <Route path="/tasks" element={<ProtectedRoute><GetAllTasks /></ProtectedRoute>} />
           <Route path="/tasks/:id" element={<ProtectedRoute><GetTaskById /></ProtectedRoute>} />
           <Route path="/tasks/:id/edit" element={<ProtectedRoute><EditTask /></ProtectedRoute>} />
@@ -52,7 +51,8 @@ const App = () => {
           <Route path="/mood" element={<ProtectedRoute><MoodTracker /></ProtectedRoute>} />
           <Route path="/streak/calendar" element={<ProtectedRoute><StreakCalendar /></ProtectedRoute>} />
           <Route path="/biorhythm" element={<ProtectedRoute><Biorhythm /></ProtectedRoute>} />
-
+          <Route path="/ask" element={<ProtectedRoute><ChatWrapper /></ProtectedRoute>} />
+          
           {/* Integrated Assessment Route */}
           <Route path="/assessment" element={<ProtectedRoute><IntegratedAssessment /></ProtectedRoute>} />
 
