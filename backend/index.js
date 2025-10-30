@@ -12,8 +12,7 @@ const streakRouter = require("./streak/router/index");
 const communityRouter = require("./community/community.router");
 const questionRouter = require("./questions/router/questions.router");
 const bioRouter = require("./biorhythm/router/biorhythm.router");
-const aiRouter = require("./ai/router/ai.router"); // 👈 Gemini router added
-
+const airouter = require("./ai/router/ai.router");
 const PORT = process.env.PORT || 5000;
 
 // Middlewares
@@ -33,7 +32,7 @@ app.use("/api/streak", streakRouter);
 app.use("/api/community", communityRouter);
 app.use("/api/questions", questionRouter);
 app.use("/api/biorhythm", bioRouter);
-app.use("/api/ai", aiRouter); // 👈 Added Gemini AI route
+app.use("/api/ai", airouter); 
 
 // Server
 app.listen(PORT, () => {

@@ -1,50 +1,22 @@
 const express = require("express");
-require("dotenv").config();
+const airouter = express.Router();
+const auth = require("../../middleware/auth.middleware");
+const chatCtrl = require("../controller/chat.controller");
 
-const router = express.Router();
-const apiKey = process.env.GEMINI_API_KEY;
 
-router.post("/ask", async (req, res) => {
-  const { prompt } = req.body;
+// Create a new chat
+airouter.post("/chats", auth, chatCtrl.createChat);
 
-  if (!prompt) {
-    return res.status(400).json({ error: "No prompt provided" });
-  }
+//Add a new message inside an existing chat 
+airouter.post("/chats/:chatId/messages", auth, chatCtrl.addMessage);
 
-  try {
-    console.log("🧠 Received Prompt:", prompt);
+// Get all chats that belong to the authenticated user
+airouter.get("/chats", auth, chatCtrl.getAllChats);
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-        }),
-      }
-    );
+// Get a specific chat by its ID (including its messages)
+airouter.get("/chats/:id", auth, chatCtrl.getChatById);
 
-    const data = await response.json();
+// Delete a chat (remove a conversation and all its messages)
+airouter.delete("/chats/:id", auth, chatCtrl.deleteChat);
 
-    if (!response.ok) {
-      console.error("🔥 API Error:", data);
-      throw new Error(data.error?.message || "Unknown error from Google API");
-    }
-
-    const reply =
-      data.candidates?.[0]?.content?.parts?.[0]?.text ||
-      "No response generated";
-
-    console.log("✨ AI Response:", reply);
-    res.json({ reply });
-  } catch (err) {
-    console.error("🔥 AI Generation Error (Full Details):", err);
-    res.status(500).json({
-      error: "An internal server error occurred during AI generation.",
-      details: err.message,
-    });
-  }
-});
-
-module.exports = router;
+module.exports = airouter;
