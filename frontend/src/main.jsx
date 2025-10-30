@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import "./Style/index.css";
 
+
 function createFloatingParticles() {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import api from "../api/axiosInstance";
 
 export default function ChatAddMessage({ chatId, onNewMessages }) {
@@ -48,7 +48,7 @@ export default function ChatAddMessage({ chatId, onNewMessages }) {
           rows={1}
         />
         <button onClick={handleSend} className="ask-send-icon" disabled={loading}>
-          💬
+          Send
         </button>
       </div>
       {loading && (

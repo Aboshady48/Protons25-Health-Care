@@ -35,7 +35,13 @@ export const Home = () => {
           <span className="home-label">Biorhythm</span>
         </div>
 
-    
+        <div
+          className="home-card ai-assistant"
+          onClick={() => navigate("/ask")}
+        >
+          <Zap className="home-icon" />
+          <span className="home-label">AI Assistant</span>
+        </div>
 
       </div>
     </div>

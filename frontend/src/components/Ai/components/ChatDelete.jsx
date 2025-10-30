@@ -14,7 +14,7 @@ export default function ChatDelete({ chatId, onDeleted }) {
 
   return (
     <button onClick={handleDelete} className="ask-delete-button">
-      🗑️
+      Delete
     </button>
   );
 }

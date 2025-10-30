@@ -55,7 +55,7 @@ export default function ChatCreate({ onChatCreated }) {
             rows={1}
           />
           <button onClick={handleCreateChat} className="ask-send-icon" disabled={loading}>
-            🚀
+            Send
           </button>
         </div>
         {loading && (

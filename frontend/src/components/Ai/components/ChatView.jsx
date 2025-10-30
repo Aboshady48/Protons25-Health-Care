@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "../api/axiosInstance";
 
 export default function ChatView({ chatId, refreshKey }) {
