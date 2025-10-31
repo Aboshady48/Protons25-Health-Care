@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ChatCreate from "./ChatCreate";
 import ChatList from "./ChatList";
 import ChatView from "./ChatView";
 import ChatAddMessage from "./ChatAddMessage";
-import api from "../api/axiosInstance"; // Note: Changed to relative import if in same folder
+import api from "../api/axiosInstance";
 import "../../../Style/Ask.css";
 
 export default function ChatWrapper() {
@@ -12,56 +12,67 @@ export default function ChatWrapper() {
   const [isCreating, setIsCreating] = useState(false);
   const [refreshCount, setRefreshCount] = useState(0);
 
+  // Fetch all chats
   const refreshChats = async () => {
     try {
       const { data } = await api.get("/chats");
-      setChats(data.chats);
+      setChats(data.chats || []);
     } catch (err) {
       console.error("Error refreshing chats:", err.message);
     }
   };
 
+  // Initial load
   useEffect(() => {
     refreshChats();
   }, []);
 
+  // Create new chat
   const handleNewChat = () => {
     setSelectedChat(null);
     setIsCreating(true);
   };
 
-  const handleChatCreated = (chat) => {
+  // After chat is created
+  const handleChatCreated = async (chat) => {
     setIsCreating(false);
+    await refreshChats();
     setSelectedChat(chat.id);
-    refreshChats();
   };
 
-  const handleDeleteChat = (id) => {
-    refreshChats();
-    if (selectedChat === id) {
-      setSelectedChat(null);
+  // Delete a chat and refresh
+  const handleDeleteChat = async (id) => {
+    try {
+      await api.delete(`/chats/${id}`);
+      await refreshChats();
+      if (selectedChat === id) setSelectedChat(null);
+    } catch (err) {
+      console.error("Error deleting chat:", err.message);
     }
   };
 
+  // Select chat
   const handleSelectChat = (id) => {
     setIsCreating(false);
     setSelectedChat(id);
   };
 
+  // Refresh current chat messages
   const refreshCurrentChat = () => {
     setRefreshCount((prev) => prev + 1);
   };
 
   return (
     <div className="ask-chat-container">
-      <div className="ask-chat-header">
+      <header className="ask-chat-header">
         <h1 className="ask-chat-title">AI Chat Assistant</h1>
-      </div>
+      </header>
 
       <div className="ask-main-layout">
-        <div className="ask-sidebar">
+        {/* Sidebar */}
+        <aside className="ask-sidebar">
           <button onClick={handleNewChat} className="ask-new-chat-button">
-            New Chat
+            + New Chat
           </button>
           <ChatList
             chats={chats}
@@ -69,20 +80,28 @@ export default function ChatWrapper() {
             onSelectChat={handleSelectChat}
             onDeleteChat={handleDeleteChat}
           />
-        </div>
+        </aside>
 
-        <div className="ask-chat-area">
+        {/* Chat Area */}
+        <main className="ask-chat-area">
           {isCreating && <ChatCreate onChatCreated={handleChatCreated} />}
-          {selectedChat && (
+
+          {selectedChat && !isCreating && (
             <>
               <ChatView chatId={selectedChat} refreshKey={refreshCount} />
-              <ChatAddMessage chatId={selectedChat} onNewMessages={refreshCurrentChat} />
+              <ChatAddMessage
+                chatId={selectedChat}
+                onNewMessages={refreshCurrentChat}
+              />
             </>
           )}
+
           {!isCreating && !selectedChat && (
-            <div className="ask-empty-chat">Select a chat or start a new one</div>
+            <div className="ask-empty-chat">
+              Select a chat or start a new one
+            </div>
           )}
-        </div>
+        </main>
       </div>
     </div>
   );

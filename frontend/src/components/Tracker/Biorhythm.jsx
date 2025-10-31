@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  Legend,
+} from "recharts";
 import "../../Style/Biorhythm.css";
 
 const Biorhythm = () => {
@@ -26,7 +36,7 @@ const Biorhythm = () => {
 
         setQuestions(qRes.data.questions);
         const profMap = {};
-        pRes.data.profiles.forEach(p => (profMap[p.profile_key] = p));
+        pRes.data.profiles.forEach((p) => (profMap[p.profile_key] = p));
         setProfiles(profMap);
       } catch (err) {
         console.error(err);
@@ -39,7 +49,6 @@ const Biorhythm = () => {
     const qId = questions[currentQ].question_id;
     setAnswers({ ...answers, [qId]: option.id });
 
-    // accumulate scores
     const newScores = { ...scores };
     Object.keys(option.points).forEach((key) => {
       newScores[key] = (newScores[key] || 0) + option.points[key];
@@ -66,7 +75,7 @@ const Biorhythm = () => {
         { answers, scores: finalScores, top_profile: topProfile },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setResult(topProfile);
+      setResult(finalScores); // store scores instead of just topProfile
     } catch (err) {
       console.error(err);
       alert("Error saving biorhythm result");
@@ -83,12 +92,14 @@ const Biorhythm = () => {
         <div className="question-block slide">
           <h3>{questions[currentQ].question_text}</h3>
           <div className="options">
-            {questions[currentQ].options.map(opt => (
+            {questions[currentQ].options.map((opt) => (
               <button
                 key={opt.id}
                 onClick={() => handleAnswer(opt)}
                 className={`option-btn ${
-                  answers[questions[currentQ].question_id] === opt.id ? "selected" : ""
+                  answers[questions[currentQ].question_id] === opt.id
+                    ? "selected"
+                    : ""
                 }`}
               >
                 {opt.text}
@@ -98,9 +109,27 @@ const Biorhythm = () => {
         </div>
       ) : (
         <div className="result-block">
-          <h2>{profiles[result]?.profile_name}</h2>
-          <p>{profiles[result]?.description}</p>
-          <button className="submit-btn" onClick={() => window.location.reload()}>
+          <h2>Your Biorhythm Chart</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart
+              data={Object.keys(result).map((key) => ({
+                time: key,
+                activity: result[key],
+              }))}
+              margin={{ top: 20, right: 30, left: 0, bottom: 5 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="time" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="activity" fill="#2f4735" />
+            </BarChart>
+          </ResponsiveContainer>
+          <button
+            className="submit-btn"
+            onClick={() => window.location.reload()}
+          >
             Restart
           </button>
         </div>

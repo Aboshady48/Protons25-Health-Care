@@ -135,7 +135,7 @@ const StreaksPage = () => {
 
   return (
     <div className="streaks-container">
-      <h2 className="page-title">🔥 Your Streaks</h2>
+      <h2 className="page-title">Your Streaks</h2>
 
       <div className="analytics-section">
         <h3>Streak Analytics</h3>

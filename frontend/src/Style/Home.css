@@ -59,3 +59,16 @@
   height: 64px;
   color: #3e5f44; 
 }
+/* ====== AI Assistant Card ====== */
+.ai-assistant {
+  background: #c6efd5;
+  box-shadow: 0px 8px 20px rgba(62, 95, 68, 0.2);
+}
+
+.ai-assistant:hover {
+  background: linear-gradient(135deg, #d9fbe4, #bce5ca);
+}
+
+.ai-assistant .home-icon {
+  color: #3e5f44; /* matches your theme */
+}
